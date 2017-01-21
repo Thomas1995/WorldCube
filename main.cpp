@@ -3,7 +3,7 @@
 
 int main() {
 	auto root = XMLParser("data.xml").GetRoot();
-	auto action = ParseableFactory::Build<Action>(root);
+	auto action = ParseableFactory<Action>::Build(root);
 
 	action.Dump(cerr);
 

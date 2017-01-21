@@ -7,92 +7,103 @@
 
 using namespace std;
 
+template<typename T>
 class ParseableFactory {
 public:
-	template<typename P>
-	static P Build(XMLNode node) {
-		P ret;
-		ret.ParseFromXML(node);
+	static T Build(XMLNode node) = delete;
+};
+
+
+class InfoMessage {
+public:
+	double time;
+	string message;
+};
+template<>
+class ParseableFactory<InfoMessage> {
+public:
+	static InfoMessage Build(XMLNode node) {
+		InfoMessage ret;
+		auto attrs = node.GetAttrs();
+
+		ret.time = stof(attrs["time"]);
+		ret.message = attrs["message"];
+		
 		return ret;
 	}
 };
 
-class InfoMessage : public Parseable {
-public:
-	double time;
-	string message;
-
-	// Parseable implementation
-	virtual string GetTagName() { return "InfoMessage"; }
-	virtual void ParseFromXML(XMLNode node) {
-		auto attrs = node.GetAttrs();
-
-		time = stof(attrs["time"]);
-		message = attrs["message"];
-	}
-};
 
 template<typename P>
-class ParseableVector : public vector<P>, public Parseable {
+class ParseableFactory<vector<P>> {
 public:
-	virtual string GetTagName() { return nullptr; }
-	virtual void ParseFromXML(XMLNode node) {
-		for(auto child : node.GetChildren()) {
-			this->push_back(ParseableFactory::Build<P>(child));
+	static vector<P> Build(XMLNode node) {
+		vector<P> ret;
+
+		for (auto child : node.GetChildren()) {
+			ret.push_back(ParseableFactory<P>::Build(child));
 		}
+		
+		return ret;
 	}
 };
 
 
-class NeedChange : public Parseable {
+class NeedChange {
 public:
 	string name;
-	double delta;
-
-	// Parseable implementation
-	virtual string GetTagName() { return "NeedChange"; }
-	virtual void ParseFromXML(XMLNode node) {
+	double delta;	
+};
+template<>
+class ParseableFactory<NeedChange> {
+public:
+	static NeedChange Build(XMLNode node) {
+		NeedChange ret;
 		auto attrs = node.GetAttrs();
 		auto vects = node.GetVectors();
 
-		name = attrs["name"];
-		delta = stof(attrs["delta"]);
+		ret.name = attrs["name"];
+		ret.delta = stof(attrs["delta"]);
+	
+		return ret;
 	}
 };
 
-class Action : public Parseable, public Dumpable {
+class Action : public Dumpable {
 public:
 	string name;
-	ParseableVector<InfoMessage> infoMessages;
-	ParseableVector<NeedChange> needChanges;
-
-	// Parseable implementation
-	virtual string GetTagName() { return "Action"; }
-	virtual void ParseFromXML(XMLNode node) {
-		auto attrs = node.GetAttrs();
-		auto vects = node.GetVectors();
-
-		name = attrs["name"];
-
-		infoMessages = ParseableFactory::Build<ParseableVector<InfoMessage>>(vects["InfoMessages"]);
-		needChanges = ParseableFactory::Build<ParseableVector<NeedChange>>(vects["NeedChanges"]);
-	}
+	vector<InfoMessage> infoMessages;
+	vector<NeedChange> needChanges;
 
 	// Dumpable implementation
 	virtual void Dump(ostream &out) {
 		out << "Action \"" << name << "\"\n";
 		out << "InfoMessages: ";
-		for(auto x : infoMessages) {
+		for (auto x : infoMessages) {
 			out << "\"" << x.message << "\" ";
 		}
 		out << "\nNeedChanges: ";
-		for(auto x : needChanges) {
+		for (auto x : needChanges) {
 			out << "[" << x.name << " -> " << x.delta << "] ";
 		}
 		out << endl;
 	}
 };
+template<> 
+class ParseableFactory<Action> {
+public:
+	static Action Build(XMLNode node) {
+		Action ret;
+		auto attrs = node.GetAttrs();
+		auto vects = node.GetVectors();
 
+		ret.name = attrs["name"];
 
+		ret.infoMessages = ParseableFactory<vector<InfoMessage>>::Build(vects["InfoMessages"]);
+		ret.needChanges = ParseableFactory<vector<NeedChange>>::Build(vects["NeedChanges"]);
+	
+		return ret;
+	}
+};
 
 #endif
