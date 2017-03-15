@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#include <map>
+#include <unordered_map>
 #include <vector>
 
 using namespace rapidxml;
@@ -35,8 +35,8 @@ public:
 		return ret;
 	}
 
-	map<string, string> GetAttrs() {
-		map<string, string> ret;
+	unordered_map<string, string> GetAttrs() {
+		unordered_map<string, string> ret;
 
 		for (xml_attribute<> *attr = node->first_attribute(); 
 			attr; attr = attr->next_attribute()) 
@@ -47,8 +47,8 @@ public:
 		return ret;
 	}
 
-	map<string, XMLNode> GetVectors() {
-		map<string, XMLNode> ret;
+	unordered_map<string, XMLNode> GetVectors() {
+		unordered_map<string, XMLNode> ret;
 
 		for (xml_node<> *attr = node->first_node(); 
 			attr; attr = attr->next_sibling()) 
