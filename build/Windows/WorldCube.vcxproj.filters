@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\abstractions">
+      <UniqueIdentifier>{9332c515-5785-466a-a430-260bccaefc3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{d87b7682-1cbe-4a1b-8073-149dc3dc9a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\_extern">
+      <UniqueIdentifier>{4e644029-27de-4998-a0c2-8083ff21348f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\_extern\rapidxml">
+      <UniqueIdentifier>{9859a0bd-ab86-4cc8-a594-7c4ef0f77cab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\abstractions\dumpable.hpp">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\abstractions\parseable.hpp">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\utils\parseable_utils.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\utils\xmlparser.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_extern\rapidxml\rapidxml.hpp">
+      <Filter>Header Files\_extern\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_extern\rapidxml\rapidxml_iterators.hpp">
+      <Filter>Header Files\_extern\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_extern\rapidxml\rapidxml_print.hpp">
+      <Filter>Header Files\_extern\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_extern\rapidxml\rapidxml_utils.hpp">
+      <Filter>Header Files\_extern\rapidxml</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

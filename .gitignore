@@ -27,3 +27,12 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio files
+*.pdb
+*.idb
+*.log
+*.tlog
+*.ilk
+*.lastbuildstate
+*.opendb
