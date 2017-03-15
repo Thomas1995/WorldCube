@@ -1,0 +1,8 @@
+language: cpp
+
+notifications:
+  email: false
+
+script:
+  - cd build/Linux
+  - make
