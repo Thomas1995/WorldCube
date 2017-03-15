@@ -23,3 +23,5 @@ sudo: false
 script:
   - cd build/Linux
   - make
+  - cd ../Windows
+  - xbuild /p:Configuration=Release WorldCube.sln
