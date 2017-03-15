@@ -13,6 +13,10 @@
 using namespace rapidxml;
 using namespace std;
 
+#ifdef VS2015
+#define strdup _strdup
+#endif
+
 class XMLNode {
 	xml_node<> *node;
 
@@ -84,7 +88,7 @@ class XMLParser {
 		string currentLine, text;
 		while (getline(fin, currentLine))
 			text += currentLine + "\n";
-		doc.parse<0>(_strdup(text.c_str()));
+		doc.parse<0>(strdup(text.c_str()));
 	}
 
 public:
