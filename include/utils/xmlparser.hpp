@@ -15,6 +15,9 @@ using namespace std;
 
 #ifdef VS2015
 #define strdup _strdup
+#define DATAPATH "..\\..\\data\\"
+#else
+#define DATAPATH "../../data/"
 #endif
 
 class XMLNode {
@@ -34,7 +37,7 @@ public:
 
 	string GetName() {
 		string ret = node->name();
-		if(IsArray()) 
+		if(IsArray())
 			return ret.substr(5, ret.size());
 		return ret;
 	}
@@ -42,8 +45,8 @@ public:
 	unordered_map<string, string> GetAttrs() {
 		unordered_map<string, string> ret;
 
-		for (xml_attribute<> *attr = node->first_attribute(); 
-			attr; attr = attr->next_attribute()) 
+		for (xml_attribute<> *attr = node->first_attribute();
+			attr; attr = attr->next_attribute())
 		{
 			ret[attr->name()] = attr->value();
 		}
@@ -54,8 +57,8 @@ public:
 	unordered_map<string, XMLNode> GetVectors() {
 		unordered_map<string, XMLNode> ret;
 
-		for (xml_node<> *attr = node->first_node(); 
-			attr; attr = attr->next_sibling()) 
+		for (xml_node<> *attr = node->first_node();
+			attr; attr = attr->next_sibling())
 		{
 			XMLNode node(attr);
 			if (node.IsArray())
@@ -68,14 +71,14 @@ public:
 	vector<XMLNode> GetChildren() {
 		vector<XMLNode> ret;
 
-		for (xml_node<> *attr = node->first_node(); 
-			attr; attr = attr->next_sibling()) 
+		for (xml_node<> *attr = node->first_node();
+			attr; attr = attr->next_sibling())
 		{
 			XMLNode node(attr);
 			if (node.IsChild())
 				ret.push_back(node);
 		}
-		
+
 		return ret;
 	}
 };
@@ -93,7 +96,7 @@ class XMLParser {
 
 public:
 	XMLParser(const string filename) {
-		ifstream fin("..\\..\\data\\" + filename);
+		ifstream fin(DATAPATH + filename);
 		makeTree(fin);
 		fin.close();
 	}
