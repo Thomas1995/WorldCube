@@ -25,4 +25,3 @@ sudo: false
 script:
   - cd build/Linux
   - make
-  - cd ../Windows
