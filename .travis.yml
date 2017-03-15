@@ -4,6 +4,8 @@ dist: trusty
 
 language: cpp
 
+solution: build/Windows/WorldCube.sln
+
 compiler:
   - g++
 install:
@@ -24,4 +26,3 @@ script:
   - cd build/Linux
   - make
   - cd ../Windows
-  - xbuild /p:Configuration=Release WorldCube.sln
