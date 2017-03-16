@@ -2,6 +2,7 @@
 #define __XML_PARSER_H
 
 #include "rapidxml/rapidxml.hpp"
+#include "utils/utils.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -15,9 +16,6 @@ using namespace std;
 
 #ifdef VS2015
 #define strdup _strdup
-#define DATAPATH "..\\..\\data\\"
-#else
-#define DATAPATH "../../data/"
 #endif
 
 class XMLNode {
@@ -96,7 +94,9 @@ class XMLParser {
 
 public:
 	XMLParser(const string filename) {
-		ifstream fin(DATAPATH + filename);
+		Path p;
+		(&p)->Add("..")->Add("..")->Add("data")->Add(filename);
+		ifstream fin(p);
 		makeTree(fin);
 		fin.close();
 	}
