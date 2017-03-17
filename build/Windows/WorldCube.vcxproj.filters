@@ -25,21 +25,27 @@
     <Filter Include="Header Files\_extern\rapidxml">
       <UniqueIdentifier>{9859a0bd-ab86-4cc8-a594-7c4ef0f77cab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{2f224944-51b1-4d68-b20c-6fc545cdc980}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\utils\parsable_utils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utils\utils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utils\xmlparser.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\abstractions\dumpable.hpp">
       <Filter>Header Files\abstractions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\abstractions\parseable.hpp">
-      <Filter>Header Files\abstractions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\utils\parseable_utils.hpp">
-      <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\utils\xmlparser.hpp">
       <Filter>Header Files\utils</Filter>
@@ -55,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_utils.hpp">
       <Filter>Header Files\_extern\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\abstractions\parsable.hpp">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\utils\parsable_utils.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\utils\utils.hpp">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

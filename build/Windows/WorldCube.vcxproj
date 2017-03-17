@@ -134,11 +134,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\utils\parsable_utils.cpp" />
+    <ClCompile Include="..\..\src\utils\utils.cpp" />
+    <ClCompile Include="..\..\src\utils\xmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\abstractions\dumpable.hpp" />
-    <ClInclude Include="..\..\include\abstractions\parseable.hpp" />
-    <ClInclude Include="..\..\include\utils\parseable_utils.hpp" />
+    <ClInclude Include="..\..\include\abstractions\parsable.hpp" />
+    <ClInclude Include="..\..\include\utils\parsable_utils.hpp" />
+    <ClInclude Include="..\..\include\utils\utils.hpp" />
     <ClInclude Include="..\..\include\utils\xmlparser.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_iterators.hpp" />
