@@ -1,5 +1,4 @@
-#ifndef __PARSEABLE_BUILDER_H_
-#define __PARSEABLE_BUILDER_H_
+#pragma once
 
 #include "xmlparser.hpp"
 #include "abstractions/parseable.hpp"
@@ -28,7 +27,7 @@ public:
 
 		ret.time = stof(attrs["time"]);
 		ret.message = attrs["message"];
-		
+
 		return ret;
 	}
 };
@@ -43,7 +42,7 @@ public:
 		for (auto child : node.GetChildren()) {
 			ret.push_back(ParseableFactory<P>::Build(child));
 		}
-		
+
 		return ret;
 	}
 };
@@ -52,7 +51,7 @@ public:
 class NeedChange {
 public:
 	string name;
-	double delta;	
+	double delta;
 };
 template<>
 class ParseableFactory<NeedChange> {
@@ -64,7 +63,7 @@ public:
 
 		ret.name = attrs["name"];
 		ret.delta = stof(attrs["delta"]);
-	
+
 		return ret;
 	}
 };
@@ -89,7 +88,7 @@ public:
 		out << endl;
 	}
 };
-template<> 
+template<>
 class ParseableFactory<Action> {
 public:
 	static Action Build(XMLNode node) {
@@ -101,9 +100,7 @@ public:
 
 		ret.infoMessages = ParseableFactory<vector<InfoMessage>>::Build(vects["InfoMessages"]);
 		ret.needChanges = ParseableFactory<vector<NeedChange>>::Build(vects["NeedChanges"]);
-	
+
 		return ret;
 	}
 };
-
-#endif

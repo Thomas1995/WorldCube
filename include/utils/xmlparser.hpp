@@ -1,5 +1,4 @@
-#ifndef __XML_PARSER_H
-#define __XML_PARSER_H
+#pragma once
 
 #include "rapidxml/rapidxml.hpp"
 #include "utils/utils.hpp"
@@ -105,5 +104,3 @@ public:
 		return XMLNode(doc.first_node());
 	}
 };
-
-#endif

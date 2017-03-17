@@ -1,5 +1,4 @@
-#ifndef __XML_UTILS_H
-#define __XML_UTILS_H
+#pragma once
 
 #include <string>
 
@@ -34,5 +33,3 @@ public:
 
   operator const char*() const { return path.c_str(); }
 };
-
-#endif
