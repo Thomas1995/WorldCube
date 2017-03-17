@@ -36,3 +36,5 @@
 *.ilk
 *.lastbuildstate
 *.opendb
+*.db
+*.suo
