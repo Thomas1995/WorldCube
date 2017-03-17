@@ -12,7 +12,6 @@ public:
 	static T Build(XMLNode node) = delete;
 };
 
-
 class InfoMessage {
 public:
 	double time;
@@ -32,7 +31,6 @@ public:
 	}
 };
 
-
 template<typename P>
 class ParsableFactory<vector<P>> {
 public:
@@ -46,7 +44,6 @@ public:
 		return ret;
 	}
 };
-
 
 class NeedChange {
 public:
@@ -75,18 +72,7 @@ public:
 	vector<NeedChange> needChanges;
 
 	// Dumpable implementation
-	virtual void Dump(ostream &out) {
-		out << "Action \"" << name << "\"\n";
-		out << "InfoMessages: ";
-		for (auto x : infoMessages) {
-			out << "\"" << x.message << "\" ";
-		}
-		out << "\nNeedChanges: ";
-		for (auto x : needChanges) {
-			out << "[" << x.name << " -> " << x.delta << "] ";
-		}
-		out << endl;
-	}
+	virtual void Dump(ostream &out);
 };
 template<>
 class ParsableFactory<Action> {
