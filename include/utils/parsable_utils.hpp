@@ -1,13 +1,13 @@
 #pragma once
 
 #include "xmlparser.hpp"
-#include "abstractions/parseable.hpp"
+#include "abstractions/parsable.hpp"
 #include "abstractions/dumpable.hpp"
 
 using namespace std;
 
 template<typename T>
-class ParseableFactory {
+class ParsableFactory {
 public:
 	static T Build(XMLNode node) = delete;
 };
@@ -19,7 +19,7 @@ public:
 	string message;
 };
 template<>
-class ParseableFactory<InfoMessage> {
+class ParsableFactory<InfoMessage> {
 public:
 	static InfoMessage Build(XMLNode node) {
 		InfoMessage ret;
@@ -34,13 +34,13 @@ public:
 
 
 template<typename P>
-class ParseableFactory<vector<P>> {
+class ParsableFactory<vector<P>> {
 public:
 	static vector<P> Build(XMLNode node) {
 		vector<P> ret;
 
 		for (auto child : node.GetChildren()) {
-			ret.push_back(ParseableFactory<P>::Build(child));
+			ret.push_back(ParsableFactory<P>::Build(child));
 		}
 
 		return ret;
@@ -54,7 +54,7 @@ public:
 	double delta;
 };
 template<>
-class ParseableFactory<NeedChange> {
+class ParsableFactory<NeedChange> {
 public:
 	static NeedChange Build(XMLNode node) {
 		NeedChange ret;
@@ -89,7 +89,7 @@ public:
 	}
 };
 template<>
-class ParseableFactory<Action> {
+class ParsableFactory<Action> {
 public:
 	static Action Build(XMLNode node) {
 		Action ret;
@@ -98,8 +98,8 @@ public:
 
 		ret.name = attrs["name"];
 
-		ret.infoMessages = ParseableFactory<vector<InfoMessage>>::Build(vects["InfoMessages"]);
-		ret.needChanges = ParseableFactory<vector<NeedChange>>::Build(vects["NeedChanges"]);
+		ret.infoMessages = ParsableFactory<vector<InfoMessage>>::Build(vects["InfoMessages"]);
+		ret.needChanges = ParsableFactory<vector<NeedChange>>::Build(vects["NeedChanges"]);
 
 		return ret;
 	}

@@ -1,9 +1,9 @@
 #include <iostream>
-#include "utils/parseable_utils.hpp"
+#include "utils/parsable_utils.hpp"
 
 int main() {
 	auto root = XMLParser("data.xml").GetRoot();
-	auto action = ParseableFactory<Action>::Build(root);
+	auto action = ParsableFactory<Action>::Build(root);
 
 	action.Dump(cerr);
 
