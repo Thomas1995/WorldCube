@@ -3,9 +3,10 @@
 
 int main() {
 	auto root = XMLParser("data.xml").GetRoot();
-	auto action = ParsableFactory<Action>::Build(root);
+	auto actions = ParsableFactory<vector<Action>>::Build(root);
 
-	action.Dump(cerr);
+	for(auto action : actions)
+		actions[0].Dump(cerr);
 
 	return 0;
 }
