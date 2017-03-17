@@ -6,7 +6,7 @@ int main() {
 	auto actions = ParsableFactory<vector<Action>>::Build(root);
 
 	for(auto action : actions)
-		actions[0].Dump(cerr);
+		action.Dump(cerr);
 
 	return 0;
 }
