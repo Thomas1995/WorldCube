@@ -1,0 +1,13 @@
+<this.Items>
+  <Item type="drink"> 
+    <this.Subitems>
+      <Subitem name="water"/>
+      <Subitem name="soda" shown="coca-cola;fanta;sprite">
+        <this.Effects>
+          <Effect name="gassiness" delta="0.8"/>
+          <Effect name="thirst" delta="1.5" delay="120"/>
+        </this.Effects>
+      </Subitem>
+    </this.Subitems>
+  </Item>
+</this.Items>

@@ -134,6 +134,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\person.cpp" />
+    <ClCompile Include="..\..\src\worldtime.cpp" />
     <ClCompile Include="..\..\src\utils\parsable_utils.cpp" />
     <ClCompile Include="..\..\src\utils\utils.cpp" />
     <ClCompile Include="..\..\src\utils\xmlparser.cpp" />
@@ -141,13 +143,19 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\abstractions\dumpable.hpp" />
     <ClInclude Include="..\..\include\abstractions\parsable.hpp" />
+    <ClInclude Include="..\..\include\person.hpp" />
     <ClInclude Include="..\..\include\utils\parsable_utils.hpp" />
     <ClInclude Include="..\..\include\utils\utils.hpp" />
     <ClInclude Include="..\..\include\utils\xmlparser.hpp" />
+    <ClInclude Include="..\..\include\worldtime.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_iterators.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_print.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_utils.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\data\actions.xml" />
+    <Xml Include="..\..\data\items.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

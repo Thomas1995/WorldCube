@@ -16,6 +16,8 @@ class InfoMessage {
 public:
 	double time;
 	string message;
+
+	static void Print(unsigned long long t, void* context);
 };
 template<>
 class ParsableFactory<InfoMessage> {
@@ -45,16 +47,16 @@ public:
 	}
 };
 
-class NeedChange {
+class Effect {
 public:
 	string name;
 	double delta;
 };
 template<>
-class ParsableFactory<NeedChange> {
+class ParsableFactory<Effect> {
 public:
-	static NeedChange Build(XMLNode node) {
-		NeedChange ret;
+	static Effect Build(XMLNode node) {
+		Effect ret;
 		auto attrs = node.GetAttrs();
 		auto vects = node.GetVectors();
 
@@ -69,7 +71,7 @@ class Action : public Dumpable {
 public:
 	string name;
 	vector<InfoMessage> infoMessages;
-	vector<NeedChange> needChanges;
+	vector<Effect> needChanges;
 
 	// Dumpable implementation
 	virtual void Dump(ostream &out);
@@ -85,7 +87,24 @@ public:
 		ret.name = attrs["name"];
 
 		ret.infoMessages = ParsableFactory<vector<InfoMessage>>::Build(vects["InfoMessages"]);
-		ret.needChanges = ParsableFactory<vector<NeedChange>>::Build(vects["NeedChanges"]);
+		ret.needChanges = ParsableFactory<vector<Effect>>::Build(vects["Effects"]);
+
+		return ret;
+	}
+};
+
+class Item : public Dumpable {
+public:
+	// Dumpable implementation
+	virtual void Dump(ostream &out);
+};
+template<>
+class ParsableFactory<Item> {
+public:
+	static Item Build(XMLNode node) {
+		Item ret;
+		auto attrs = node.GetAttrs();
+		auto vects = node.GetVectors();
 
 		return ret;
 	}
