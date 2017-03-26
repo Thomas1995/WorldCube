@@ -27,12 +27,12 @@ void Time::Tick() {
 	std::lock_guard<std::mutex> lk(singletonPtr->mut);
 	++time;
 	while (!singletonPtr->cbks.empty() && std::get<0>(singletonPtr->cbks.top()) <= time) {
-		std::get<1>(singletonPtr->cbks.top())(time, std::get<2>(singletonPtr->cbks.top()));
+		std::get<1>(singletonPtr->cbks.top())(time, std::get<2>(singletonPtr->cbks.top()), std::get<3>(singletonPtr->cbks.top()));
 		singletonPtr->cbks.pop();
 	}
 }
 
-void Time::RegisterCbk(unsigned long long t, void(*fct)(unsigned long long, void*), void* context) {
+void Time::RegisterCbk(unsigned long long t, void(*fct)(unsigned long long, void*, void*), void* context, void* additionalInfo) {
 	std::lock_guard<std::mutex> lk(singletonPtr->mut);
-	singletonPtr->cbks.push(std::make_tuple(t, fct, context));
+	singletonPtr->cbks.push(std::make_tuple(t, fct, context, additionalInfo));
 }

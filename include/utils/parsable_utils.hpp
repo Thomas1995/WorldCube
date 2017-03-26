@@ -3,6 +3,7 @@
 #include "xmlparser.hpp"
 #include "abstractions/parsable.hpp"
 #include "abstractions/dumpable.hpp"
+#include <unordered_map>
 
 using namespace std;
 
@@ -12,12 +13,15 @@ public:
 	static T Build(XMLNode node) = delete;
 };
 
+class Person;
+
 class InfoMessage {
 public:
 	double time;
 	string message;
 
-	static void Print(unsigned long long t, void* context);
+	static void s_Print(unsigned long long t, void* context, void* additionalInfo);
+	void Print(unsigned long long t, Person* owner);
 };
 template<>
 class ParsableFactory<InfoMessage> {
@@ -71,7 +75,8 @@ class Action : public Dumpable {
 public:
 	string name;
 	vector<InfoMessage> infoMessages;
-	vector<Effect> needChanges;
+	vector<Effect> effects;
+	std::pair<int, int> timeSpent;
 
 	// Dumpable implementation
 	virtual void Dump(ostream &out);
@@ -85,9 +90,15 @@ public:
 		auto vects = node.GetVectors();
 
 		ret.name = attrs["name"];
+		
+		auto timeSpentVec = Split(attrs["time"], '-');
+		if (timeSpentVec.size() == 2) {
+			ret.timeSpent.first = atoi(timeSpentVec[0].c_str());
+			ret.timeSpent.second = atoi(timeSpentVec[1].c_str());
+		}
 
 		ret.infoMessages = ParsableFactory<vector<InfoMessage>>::Build(vects["InfoMessages"]);
-		ret.needChanges = ParsableFactory<vector<Effect>>::Build(vects["Effects"]);
+		ret.effects = ParsableFactory<vector<Effect>>::Build(vects["Effects"]);
 
 		return ret;
 	}

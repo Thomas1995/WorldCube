@@ -7,7 +7,7 @@
 #include <tuple>
 #include <vector>
 
-#define CALLBACK std::tuple<unsigned long long, void(*)(unsigned long long, void*), void*>
+#define CALLBACK std::tuple<unsigned long long, void(*)(unsigned long long, void*, void*), void*, void*>
 
 class Time {
 	static Time* singletonPtr;
@@ -25,7 +25,7 @@ class Time {
 public:
 	static void Init(int ms);
 	static unsigned long long GetCurrentTime();
-	static void RegisterCbk(unsigned long long t, void (*)(unsigned long long, void*), void* context);
+	static void RegisterCbk(unsigned long long t, void (*)(unsigned long long, void*, void*), void* context, void* additionalInfo);
 
 private:
 	void Tick();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class Path {
   std::string path;
@@ -16,3 +17,5 @@ public:
   Path* Pop();
   operator const char*() const;
 };
+
+std::vector<std::string> Split(std::string str, char separator = ' ');
