@@ -4,8 +4,7 @@
 #include "abstractions/parsable.hpp"
 #include "abstractions/dumpable.hpp"
 #include <unordered_map>
-
-using namespace std;
+#include <string>
 
 template<typename T>
 class ParsableFactory {
@@ -18,7 +17,7 @@ class Person;
 class InfoMessage {
 public:
 	double time;
-	string message;
+	std::string message;
 
 	static void s_Print(unsigned long long t, void* context, void* additionalInfo);
 	void Print(unsigned long long t, Person* owner);
@@ -38,10 +37,10 @@ public:
 };
 
 template<typename P>
-class ParsableFactory<vector<P>> {
+class ParsableFactory<std::vector<P>> {
 public:
-	static vector<P> Build(XMLNode node) {
-		vector<P> ret;
+	static std::vector<P> Build(XMLNode node) {
+		std::vector<P> ret;
 
 		for (auto child : node.GetChildren()) {
 			ret.push_back(ParsableFactory<P>::Build(child));
@@ -51,9 +50,24 @@ public:
 	}
 };
 
+template<typename P>
+class ParsableFactory<std::unordered_map<std::string, P>> {
+public:
+	static std::unordered_map<std::string, P> Build(XMLNode node) {
+		std::unordered_map<std::string, P> ret;
+
+		for (auto child : node.GetChildren()) {
+			P item = ParsableFactory<P>::Build(child);
+			ret[item.name] = item;
+		}
+
+		return ret;
+	}
+};
+
 class Effect {
 public:
-	string name;
+	std::string name;
 	double delta;
 };
 template<>
@@ -73,13 +87,13 @@ public:
 
 class Action : public Dumpable {
 public:
-	string name;
-	vector<InfoMessage> infoMessages;
-	vector<Effect> effects;
+	std::string name;
+	std::vector<InfoMessage> infoMessages;
+	std::vector<Effect> effects;
 	std::pair<int, int> timeSpent;
 
 	// Dumpable implementation
-	virtual void Dump(ostream &out);
+	virtual void Dump(std::ostream &out);
 };
 template<>
 class ParsableFactory<Action> {
@@ -97,8 +111,8 @@ public:
 			ret.timeSpent.second = atoi(timeSpentVec[1].c_str());
 		}
 
-		ret.infoMessages = ParsableFactory<vector<InfoMessage>>::Build(vects["InfoMessages"]);
-		ret.effects = ParsableFactory<vector<Effect>>::Build(vects["Effects"]);
+		ret.infoMessages = ParsableFactory<std::vector<InfoMessage>>::Build(vects["InfoMessages"]);
+		ret.effects = ParsableFactory<std::vector<Effect>>::Build(vects["Effects"]);
 
 		return ret;
 	}
@@ -106,8 +120,10 @@ public:
 
 class Item : public Dumpable {
 public:
+	std::string name;
+
 	// Dumpable implementation
-	virtual void Dump(ostream &out);
+	virtual void Dump(std::ostream &out);
 };
 template<>
 class ParsableFactory<Item> {

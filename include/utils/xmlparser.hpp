@@ -11,7 +11,6 @@
 #include <vector>
 
 using namespace rapidxml;
-using namespace std;
 
 #ifdef VS2015
 #define strdup _strdup
@@ -25,19 +24,19 @@ public:
 	XMLNode();
 	bool IsArray();
 	bool IsChild();
-	string GetName();
-	unordered_map<string, string> GetAttrs();
-	unordered_map<string, XMLNode> GetVectors();
-	vector<XMLNode> GetChildren();
+	std::string GetName();
+	std::unordered_map<std::string, std::string> GetAttrs();
+	std::unordered_map<std::string, XMLNode> GetVectors();
+	std::vector<XMLNode> GetChildren();
 };
 
 
 class XMLParser {
 	xml_document<> doc;
 
-	void makeTree(istream &fin);
+	void makeTree(std::istream &fin);
 
 public:
-	XMLParser(const string filename);
+	XMLParser(const std::string filename);
 	XMLNode GetRoot();
 };

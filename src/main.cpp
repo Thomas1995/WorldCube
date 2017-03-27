@@ -5,11 +5,11 @@
 #include "person.hpp"
 
 int main() {
-	auto actions = ParsableFactory<vector<Action>>::Build(XMLParser("actions.xml").GetRoot());
-	auto items = ParsableFactory<vector<Item>>::Build(XMLParser("items.xml").GetRoot());
+	auto actions = ParsableFactory<std::unordered_map<std::string, Action>>::Build(XMLParser("actions.xml").GetRoot());
+	auto items = ParsableFactory<std::unordered_map<std::string, Item>>::Build(XMLParser("items.xml").GetRoot());
 
 	for(auto action : actions)
-		action.Dump(cerr);
+		action.second.Dump(std::cerr);
 
 	Person p("Steve");
 
@@ -18,8 +18,8 @@ int main() {
 
 	std::string cmd;
 	while (true) {
-		cin >> cmd;
-		p.DoAction(actions[0]);
+		std::cin >> cmd;
+		p.DoAction(actions["drink"]);
 	}
 
 	return 0;

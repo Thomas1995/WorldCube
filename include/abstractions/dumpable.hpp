@@ -2,5 +2,5 @@
 
 class Dumpable {
 public:
-	virtual void Dump(ostream &out) = 0;
+	virtual void Dump(std::ostream &out) = 0;
 };

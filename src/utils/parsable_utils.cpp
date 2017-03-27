@@ -4,7 +4,7 @@
 
 // Action
 
-void Action::Dump(ostream &out) {
+void Action::Dump(std::ostream &out) {
   out << "Action \"" << name << "\"\n";
   out << "InfoMessages: ";
   for (auto x : infoMessages) {
@@ -14,10 +14,10 @@ void Action::Dump(ostream &out) {
   for (auto x : effects) {
     out << "[" << x.name << " -> " << x.delta << "] ";
   }
-  out << endl;
+  out << std::endl;
 }
 
-void Item::Dump(ostream &out) {}
+void Item::Dump(std::ostream &out) {}
 
 // InfoMessage
 
