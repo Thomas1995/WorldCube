@@ -135,8 +135,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\person.cpp" />
+    <ClCompile Include="..\..\src\world.cpp" />
     <ClCompile Include="..\..\src\worldtime.cpp" />
-    <ClCompile Include="..\..\src\utils\parsable_utils.cpp" />
     <ClCompile Include="..\..\src\utils\utils.cpp" />
     <ClCompile Include="..\..\src\utils\xmlparser.cpp" />
   </ItemGroup>
@@ -147,6 +147,7 @@
     <ClInclude Include="..\..\include\utils\parsable_utils.hpp" />
     <ClInclude Include="..\..\include\utils\utils.hpp" />
     <ClInclude Include="..\..\include\utils\xmlparser.hpp" />
+    <ClInclude Include="..\..\include\world.hpp" />
     <ClInclude Include="..\..\include\worldtime.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_iterators.hpp" />

@@ -3,6 +3,7 @@
 #include "xmlparser.hpp"
 #include "abstractions/parsable.hpp"
 #include "abstractions/dumpable.hpp"
+#include "world.hpp"
 #include <unordered_map>
 #include <string>
 
@@ -12,16 +13,6 @@ public:
 	static T Build(XMLNode node) = delete;
 };
 
-class Person;
-
-class InfoMessage {
-public:
-	double time;
-	std::string message;
-
-	static void s_Print(unsigned long long t, void* context, void* additionalInfo);
-	void Print(unsigned long long t, Person* owner);
-};
 template<>
 class ParsableFactory<InfoMessage> {
 public:
@@ -65,11 +56,6 @@ public:
 	}
 };
 
-class Effect {
-public:
-	std::string name;
-	double delta;
-};
 template<>
 class ParsableFactory<Effect> {
 public:
@@ -85,16 +71,6 @@ public:
 	}
 };
 
-class Action : public Dumpable {
-public:
-	std::string name;
-	std::vector<InfoMessage> infoMessages;
-	std::vector<Effect> effects;
-	std::pair<int, int> timeSpent;
-
-	// Dumpable implementation
-	virtual void Dump(std::ostream &out);
-};
 template<>
 class ParsableFactory<Action> {
 public:
@@ -118,13 +94,6 @@ public:
 	}
 };
 
-class Item : public Dumpable {
-public:
-	std::string name;
-
-	// Dumpable implementation
-	virtual void Dump(std::ostream &out);
-};
 template<>
 class ParsableFactory<Item> {
 public:

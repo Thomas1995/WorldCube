@@ -1,20 +1,20 @@
-#include "utils/parsable_utils.hpp"
-#include <iostream>
+#include "world.hpp"
 #include "person.hpp"
+#include <iostream>
 
 // Action
 
 void Action::Dump(std::ostream &out) {
-  out << "Action \"" << name << "\"\n";
-  out << "InfoMessages: ";
-  for (auto x : infoMessages) {
-    out << "\"" << x.message << "\" ";
-  }
-  out << "\nEffects: ";
-  for (auto x : effects) {
-    out << "[" << x.name << " -> " << x.delta << "] ";
-  }
-  out << std::endl;
+	out << "Action \"" << name << "\"\n";
+	out << "InfoMessages: ";
+	for (auto x : infoMessages) {
+		out << "\"" << x.message << "\" ";
+	}
+	out << "\nEffects: ";
+	for (auto x : effects) {
+		out << "[" << x.name << " -> " << x.delta << "] ";
+	}
+	out << std::endl;
 }
 
 void Item::Dump(std::ostream &out) {}
