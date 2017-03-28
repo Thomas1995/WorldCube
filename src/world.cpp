@@ -1,5 +1,6 @@
 #include "world.hpp"
 #include "person.hpp"
+#include "utils/parsable_utils.hpp"
 #include <iostream>
 
 // Action
@@ -48,4 +49,29 @@ void InfoMessage::Print(unsigned long long t, Person* owner) {
 	}
 
 	std::cout << t << ": " << printMsg << "\n";
+}
+
+// World
+
+World* World::singletonPtr = nullptr;
+
+World::World() {
+	actions = ParsableFactory<std::unordered_map<std::string, Action>>::Build(XMLParser("actions.xml").GetRoot());
+	items = ParsableFactory<std::unordered_map<std::string, Item>>::Build(XMLParser("items.xml").GetRoot());
+}
+
+World::~World() {}
+
+void World::Init() {
+	if (singletonPtr == nullptr) {
+		singletonPtr = new World();
+	}
+}
+
+Action& World::GetAction(const std::string name) {
+	return singletonPtr->actions[name];
+}
+
+Item& World::GetItem(const std::string name) {
+	return singletonPtr->items[name];
 }

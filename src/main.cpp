@@ -5,11 +5,7 @@
 #include "person.hpp"
 
 int main() {
-	auto actions = ParsableFactory<std::unordered_map<std::string, Action>>::Build(XMLParser("actions.xml").GetRoot());
-	auto items = ParsableFactory<std::unordered_map<std::string, Item>>::Build(XMLParser("items.xml").GetRoot());
-
-	for(auto action : actions)
-		action.second.Dump(std::cerr);
+	World::Init();
 
 	Person p("Steve");
 
@@ -19,7 +15,7 @@ int main() {
 	std::string cmd;
 	while (true) {
 		std::cin >> cmd;
-		p.DoAction(actions["drink"]);
+		p.DoAction(World::GetAction("drink"));
 	}
 
 	return 0;

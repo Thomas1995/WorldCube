@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 #include "abstractions/dumpable.hpp"
 
 class Person;
@@ -39,4 +40,23 @@ public:
 
 	// Dumpable implementation
 	virtual void Dump(std::ostream &out);
+};
+
+class World {
+	std::unordered_map<std::string, Action> actions;
+	std::unordered_map<std::string, Item> items;
+
+	static World* singletonPtr;
+
+	World();
+	~World();
+
+	World(const World&) = delete;
+	void operator = (const World&) = delete;
+
+public:
+	static void Init();
+
+	static Action& GetAction(const std::string name);
+	static Item& GetItem(const std::string name);
 };
