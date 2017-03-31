@@ -68,7 +68,8 @@ public:
 		ret.delta = stof(attrs["delta"]);
 		if (attrs.find("delay") == attrs.end()) {
 			ret.delay = 0;
-		} else {
+		}
+		else {
 			ret.delay = stoi(attrs["delay"]);
 		}
 
@@ -137,6 +138,26 @@ public:
 		
 		if (vects.find("Effects") != vects.end())
 			ret.effects = ParsableFactory<std::vector<Effect>>::Build(vects["Effects"]);
+
+		return ret;
+	}
+};
+
+template<>
+class ParsableFactory<Need> {
+public:
+	static Need Build(XMLNode node) {
+		Need ret;
+		auto attrs = node.GetAttrs();
+		auto vects = node.GetVectors();
+
+		if (attrs.find("unit") != attrs.end()) {
+			ret.unit = stoi(attrs["unit"]);
+		}
+		else {
+			ret.name = attrs["name"];
+			ret.delta = stof(attrs["delta"]);
+		}
 
 		return ret;
 	}

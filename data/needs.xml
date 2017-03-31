@@ -1,0 +1,8 @@
+<this.Needs>
+  <Need unit="60"/>
+  <Need name="fatigue" delta="0.1"/>
+  <Need name="hunger" delta="0.1"/>
+  <Need name="thirst" delta="0.1"/>
+  <Need name="bladder" delta="0.1"/>
+  <Need name="gassiness" delta="0.1"/>
+</this.Needs>

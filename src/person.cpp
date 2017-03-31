@@ -50,6 +50,7 @@ void Person::UpdateNeed(unsigned long long t, void* context, void* additionalInf
 	Person* pers = static_cast<Person*>(context);
 	const Effect* eff = (Effect*)(additionalInfo);
 
+	std::lock_guard<std::mutex> lk(pers->mut);
 	pers->needs[eff->name] += eff->delta;
 	if (pers->needs[eff->name] < 0)
 		pers->needs[eff->name] = 0;

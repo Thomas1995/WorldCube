@@ -3,10 +3,12 @@
 #include "world.hpp"
 #include <string>
 #include <unordered_map>
+#include <mutex>
 
 class Person {
 public:
 	std::unordered_map<std::string, double> needs;
+	std::mutex mut;
 
 	Person(const std::string name);
 	

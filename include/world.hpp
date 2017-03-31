@@ -17,6 +17,13 @@ public:
 	void Print(unsigned long long t, Person* owner);
 };
 
+class Need {
+public:
+	static int unit;
+	std::string name;
+	double delta;
+};
+
 class Effect {
 public:
 	std::string name;
@@ -56,6 +63,8 @@ public:
 };
 
 class World {
+	std::vector<Person*> population;
+	std::vector<Need> needs;
 	std::unordered_map<std::string, Item> items;
 	std::unordered_map<std::string, Action> actions;
 
@@ -72,4 +81,7 @@ public:
 
 	static Action* GetAction(const std::string name);
 	static Item* GetItem(const std::string name);
+	static Person* GetPerson(const int index);
+	static std::vector<Need>* GetNeeds();
+	static void ApplyOnPopulation(void (*fct)(Person* p));
 };

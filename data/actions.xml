@@ -9,14 +9,13 @@
       <Effect name="bladder" delta="3" delay="3600"/>
     </this.Effects>
   </Action>
-	<Action name="sleep" time="0-0">
+	<Action name="sleep" time="14400-43200">
 		<this.InfoMessages>
 			<InfoMessage time="0.0" message="%NAME% went to sleep."/>
 			<InfoMessage time="1.0" message="%NAME% has awoken."/>
 		</this.InfoMessages>
 		<this.Effects>
-			<Effect name="energy" delta="5.5"/>
-			<Effect name="bladder" delta="0.5"/>
+			<Effect name="fatigue" delta="-5.5"/>
 		</this.Effects>
 	</Action>
 </this.Actions>

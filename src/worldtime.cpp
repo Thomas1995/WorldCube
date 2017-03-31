@@ -1,4 +1,6 @@
 #include "worldtime.hpp"
+#include "world.hpp"
+#include "person.hpp"
 
 Time* Time::singletonPtr = nullptr;
 
@@ -33,6 +35,18 @@ void Time::Tick() {
 			singletonPtr->cbks.pop();
 		}
 		std::get<1>(top)(time, std::get<2>(top), std::get<3>(top));
+	}
+
+	// it is time to update needs for the whole population
+	if (time % Need::unit == 0) {
+		World::ApplyOnPopulation([](Person* p) {
+			auto needs = World::GetNeeds();
+
+			std::lock_guard<std::mutex> lk(p->mut);
+			for (auto need : *needs) {
+				p->needs[need.name] += need.delta;
+			}
+		});
 	}
 }
 
