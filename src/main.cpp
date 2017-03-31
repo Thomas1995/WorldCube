@@ -5,8 +5,6 @@
 #include "person.hpp"
 #include "utils/random.hpp"
 
-int v[105];
-
 int main() {
 	Random::Init();
 	World::Init();

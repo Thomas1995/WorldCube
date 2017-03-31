@@ -24,11 +24,15 @@ unsigned long long Time::GetCurrentTime() {
 }
 
 void Time::Tick() {
-	std::lock_guard<std::mutex> lk(singletonPtr->mut);
 	++time;
+	CALLBACK top;
 	while (!singletonPtr->cbks.empty() && std::get<0>(singletonPtr->cbks.top()) <= time) {
-		std::get<1>(singletonPtr->cbks.top())(time, std::get<2>(singletonPtr->cbks.top()), std::get<3>(singletonPtr->cbks.top()));
-		singletonPtr->cbks.pop();
+		{
+			std::lock_guard<std::mutex> lk(singletonPtr->mut);
+			top = singletonPtr->cbks.top();
+			singletonPtr->cbks.pop();
+		}
+		std::get<1>(top)(time, std::get<2>(top), std::get<3>(top));
 	}
 }
 

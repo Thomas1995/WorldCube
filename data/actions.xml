@@ -6,7 +6,7 @@
     </this.InfoMessages>
     <this.Effects>
       <Effect name="thirst" delta="-5"/>
-      <Effect name="bladder" delta="3" delay="2"/>
+      <Effect name="bladder" delta="3" delay="2000"/>
     </this.Effects>
   </Action>
 	<Action name="sleep" time="0-0">
