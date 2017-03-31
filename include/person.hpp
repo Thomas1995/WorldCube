@@ -12,7 +12,7 @@ public:
 	
 	std::string GetName();
 	std::string GetEnvVar(const std::string var);
-	void DoAction(const Action& action);
+	void DoAction(Action* action);
 
 private:
 	std::unordered_map<std::string, std::string> envVars;

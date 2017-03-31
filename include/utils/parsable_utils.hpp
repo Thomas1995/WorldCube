@@ -90,6 +90,10 @@ public:
 		ret.infoMessages = ParsableFactory<std::vector<InfoMessage>>::Build(vects["InfoMessages"]);
 		ret.effects = ParsableFactory<std::vector<Effect>>::Build(vects["Effects"]);
 
+		if (attrs.find("item") != attrs.end()) {
+			ret.item = World::GetItem(attrs["item"]);
+		}
+
 		return ret;
 	}
 };

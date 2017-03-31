@@ -13,18 +13,18 @@ std::string Person::GetEnvVar(const std::string var) {
 	return envVars[var.c_str()];
 }
 
-void Person::DoAction(const Action& action) {
+void Person::DoAction(Action* action) {
 	unsigned long long crtTime = Time::GetCurrentTime();
 	// change to normal distribution here for [action.timeSpent.first, action.timeSpent.second]
 	// maybe use a person generated seed to make someone's habits not change so much
-	int spentTime = (action.timeSpent.second + action.timeSpent.first) / 2;
+	int spentTime = (action->timeSpent.second + action->timeSpent.first) / 2;
 
 	// get this data from xml
 	envVars["QUANTITY"] = "1";
 	envVars["ITEM"] = "coke";
 
 	// register InfoMessages
-	for (auto& im : action.infoMessages) {
+	for (auto& im : action->infoMessages) {
 		im.time == 0 ? 
 			im.s_Print(crtTime, (void*)&im, this) :
 			Time::RegisterCbk(crtTime + (unsigned long long)(im.time * spentTime), &im.s_Print, (void*)&im, this);

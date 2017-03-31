@@ -61,23 +61,23 @@ void InfoMessage::Print(unsigned long long t, Person* owner) {
 
 World* World::singletonPtr = nullptr;
 
-World::World() {
-	actions = ParsableFactory<std::unordered_map<std::string, Action>>::Build(XMLParser("actions.xml").GetRoot());
-	items = ParsableFactory<std::unordered_map<std::string, Item>>::Build(XMLParser("items.xml").GetRoot());
-}
+World::World() {}
 
 World::~World() {}
 
 void World::Init() {
 	if (singletonPtr == nullptr) {
 		singletonPtr = new World();
+
+		singletonPtr->items = ParsableFactory<std::unordered_map<std::string, Item>>::Build(XMLParser("items.xml").GetRoot());
+		singletonPtr->actions = ParsableFactory<std::unordered_map<std::string, Action>>::Build(XMLParser("actions.xml").GetRoot());
 	}
 }
 
-Action& World::GetAction(const std::string name) {
-	return singletonPtr->actions[name];
+Action* World::GetAction(const std::string name) {
+	return &singletonPtr->actions[name];
 }
 
-Item& World::GetItem(const std::string name) {
-	return singletonPtr->items[name];
+Item* World::GetItem(const std::string name) {
+	return &singletonPtr->items[name];
 }

@@ -23,17 +23,6 @@ public:
 	double delta;
 };
 
-class Action : public Dumpable {
-public:
-	std::string name;
-	std::vector<InfoMessage> infoMessages;
-	std::vector<Effect> effects;
-	std::pair<int, int> timeSpent;
-
-	// Dumpable implementation
-	virtual void Dump(std::ostream &out);
-};
-
 class Subitem : public Dumpable {
 public:
 	std::string name;
@@ -53,9 +42,21 @@ public:
 	virtual void Dump(std::ostream &out);
 };
 
+class Action : public Dumpable {
+public:
+	std::string name;
+	std::vector<InfoMessage> infoMessages;
+	std::vector<Effect> effects;
+	std::pair<int, int> timeSpent;
+	Item* item;
+
+	// Dumpable implementation
+	virtual void Dump(std::ostream &out);
+};
+
 class World {
-	std::unordered_map<std::string, Action> actions;
 	std::unordered_map<std::string, Item> items;
+	std::unordered_map<std::string, Action> actions;
 
 	static World* singletonPtr;
 
@@ -68,6 +69,6 @@ class World {
 public:
 	static void Init();
 
-	static Action& GetAction(const std::string name);
-	static Item& GetItem(const std::string name);
+	static Action* GetAction(const std::string name);
+	static Item* GetItem(const std::string name);
 };
