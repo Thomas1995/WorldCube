@@ -1,5 +1,5 @@
 <this.Items>
-  <Item type="drink"> 
+  <Item name="drink"> 
     <this.Subitems>
       <Subitem name="water"/>
       <Subitem name="soda" shown="coca-cola;fanta;sprite">

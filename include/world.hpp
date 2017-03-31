@@ -34,9 +34,19 @@ public:
 	virtual void Dump(std::ostream &out);
 };
 
+class Subitem : public Dumpable {
+public:
+	std::string name;
+	std::vector<Effect> effects;
+
+	// Dumpable implementation
+	virtual void Dump(std::ostream &out);
+};
+
 class Item : public Dumpable {
 public:
 	std::string name;
+	std::vector<Subitem> subitems;
 
 	// Dumpable implementation
 	virtual void Dump(std::ostream &out);

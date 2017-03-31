@@ -18,7 +18,13 @@ void Action::Dump(std::ostream &out) {
 	out << std::endl;
 }
 
+// Item
+
 void Item::Dump(std::ostream &out) {}
+
+// Subitem
+
+void Subitem::Dump(std::ostream & out) {}
 
 // InfoMessage
 

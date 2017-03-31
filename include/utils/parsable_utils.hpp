@@ -102,6 +102,26 @@ public:
 		auto attrs = node.GetAttrs();
 		auto vects = node.GetVectors();
 
+		ret.name = attrs["name"];
+		ret.subitems = ParsableFactory<std::vector<Subitem>>::Build(vects["Subitems"]);
+
+		return ret;
+	}
+};
+
+template<>
+class ParsableFactory<Subitem> {
+public:
+	static Subitem Build(XMLNode node) {
+		Subitem ret;
+		auto attrs = node.GetAttrs();
+		auto vects = node.GetVectors();
+
+		ret.name = attrs["name"];
+		
+		if (vects.find("Effects") != vects.end())
+			ret.effects = ParsableFactory<std::vector<Effect>>::Build(vects["Effects"]);
+
 		return ret;
 	}
 };
