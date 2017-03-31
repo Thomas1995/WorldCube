@@ -18,4 +18,5 @@ private:
 	std::unordered_map<std::string, std::string> envVars;
 
 	static void FinishAction(unsigned long long t, void* context, void* additionalInfo);
+	static void UpdateNeed(unsigned long long t, void* context, void* additionalInfo);
 };

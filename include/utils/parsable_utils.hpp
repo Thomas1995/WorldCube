@@ -66,6 +66,11 @@ public:
 
 		ret.name = attrs["name"];
 		ret.delta = stof(attrs["delta"]);
+		if (attrs.find("delay") == attrs.end()) {
+			ret.delay = 0;
+		} else {
+			ret.delay = stof(attrs["delay"]);
+		}
 
 		return ret;
 	}

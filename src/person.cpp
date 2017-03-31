@@ -38,10 +38,21 @@ void Person::FinishAction(unsigned long long t, void* context, void* additionalI
 	const Action* action = (Action*)additionalInfo;
 
 	for (const auto& eff : action->effects) {
-		pers->needs[eff.name] += eff.delta;
-		if (pers->needs[eff.name] < 0)
-			pers->needs[eff.name] = 0;
-
-		std::cout << eff.name << " " << pers->needs[eff.name] << "\n"; // delete this line
+		if (eff.delay == 0) {
+			UpdateNeed(t, pers, (void*)&eff);
+		} else {
+			Time::RegisterCbk(t + (unsigned long long)eff.delay, &Person::UpdateNeed, pers, (void*)&eff);
+		}
 	}
+}
+
+void Person::UpdateNeed(unsigned long long t, void* context, void* additionalInfo) {
+	Person* pers = static_cast<Person*>(context);
+	const Effect* eff = (Effect*)(additionalInfo);
+
+	pers->needs[eff->name] += eff->delta;
+	if (pers->needs[eff->name] < 0)
+		pers->needs[eff->name] = 0;
+
+	std::cout << eff->name << " " << pers->needs[eff->name] << "\n"; // delete this line
 }

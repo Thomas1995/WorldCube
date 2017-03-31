@@ -21,6 +21,7 @@ class Effect {
 public:
 	std::string name;
 	double delta;
+	int delay;
 };
 
 class Subitem : public Dumpable {
