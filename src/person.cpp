@@ -1,5 +1,6 @@
 #include "person.hpp"
 #include "worldtime.hpp"
+#include "utils/random.hpp"
 
 Person::Person(const std::string name) {
 	envVars["NAME"] = name;
@@ -15,9 +16,7 @@ std::string Person::GetEnvVar(const std::string var) {
 
 void Person::DoAction(Action* action) {
 	unsigned long long crtTime = Time::GetCurrentTime();
-	// change to normal distribution here for [action.timeSpent.first, action.timeSpent.second]
-	// maybe use a person generated seed to make someone's habits not change so much
-	int spentTime = (action->timeSpent.second + action->timeSpent.first) / 2;
+	int spentTime = Random::GetRandBinomialDistr(action->timeSpent.first, action->timeSpent.second);
 
 	// get this data from xml
 	envVars["QUANTITY"] = "1";
