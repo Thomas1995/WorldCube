@@ -9,7 +9,7 @@ int main() {
 	Random::Init();
 	World::Init();
 
-	Person p("Steve");
+	Person p("Steve")
 
 	std::thread timeThread(&Time::Init, 1);
 	timeThread.detach();
