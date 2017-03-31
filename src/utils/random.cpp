@@ -11,7 +11,7 @@ void Random::Init() {
 	}
 }
 
-double Random::GetRandNormalDistr(double inf, double sup, double mean, double stddev) {
+double Random::GetRandNormalDistr(const double inf, const double sup, const double mean, const double stddev) {
 	std::normal_distribution<double> d(mean, stddev);
 	double ret;
 	
@@ -22,17 +22,17 @@ double Random::GetRandNormalDistr(double inf, double sup, double mean, double st
 	return ret;
 }
 
-double Random::GetRandUniformDistr(double inf, double sup) {
+double Random::GetRandUniformDistr(const double inf, const double sup) {
 	std::uniform_real_distribution<double> distribution(inf, sup);
 	return distribution(singletonPtr->generator);
 }
 
-int Random::GetRandBinomialDistr(int inf, int sup, double p) {
+int Random::GetRandBinomialDistr(const int inf, const int sup, const double p) {
 	std::binomial_distribution<int> d(sup - inf, p);
 	return inf + d(singletonPtr->generator);
 }
 
-int Random::GetRandUniformDistr(int inf, int sup) {
+int Random::GetRandUniformDistr(const int inf, const int sup) {
 	std::uniform_int_distribution<int> distribution(inf, sup);
 	return distribution(singletonPtr->generator);
 }

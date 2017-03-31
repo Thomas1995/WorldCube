@@ -16,9 +16,9 @@ class Random {
 public:
 	static void Init();
 
-	static double GetRandNormalDistr(double inf, double sup, double mean = 0, double stddev = 1);
-	static double GetRandUniformDistr(double inf, double sup);
+	static double GetRandNormalDistr(const double inf, const double sup, const double mean = 0, const double stddev = 1);
+	static double GetRandUniformDistr(const double inf, const double sup);
 	
-	static int GetRandBinomialDistr(int inf, int sup, double p = 0.5);
-	static int GetRandUniformDistr(int inf, int sup);
+	static int GetRandBinomialDistr(const int inf, const int sup, const double p = 0.5);
+	static int GetRandUniformDistr(const int inf, const int sup);
 };
