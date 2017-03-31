@@ -118,6 +118,13 @@ public:
 		auto vects = node.GetVectors();
 
 		ret.name = attrs["name"];
+
+		if (attrs.find("shown") != attrs.end()) {
+			ret.shownNames = Split(attrs["shown"], ';');
+		}
+		else {
+			ret.shownNames.push_back(ret.name);
+		}
 		
 		if (vects.find("Effects") != vects.end())
 			ret.effects = ParsableFactory<std::vector<Effect>>::Build(vects["Effects"]);

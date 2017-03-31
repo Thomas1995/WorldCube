@@ -38,6 +38,7 @@ class Subitem : public Dumpable {
 public:
 	std::string name;
 	std::vector<Effect> effects;
+	std::vector<std::string> shownNames;
 
 	// Dumpable implementation
 	virtual void Dump(std::ostream &out);
