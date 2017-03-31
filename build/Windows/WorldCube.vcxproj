@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\person.cpp" />
+    <ClCompile Include="..\..\src\utils\random.cpp" />
     <ClCompile Include="..\..\src\world.cpp" />
     <ClCompile Include="..\..\src\worldtime.cpp" />
     <ClCompile Include="..\..\src\utils\utils.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="..\..\include\abstractions\parsable.hpp" />
     <ClInclude Include="..\..\include\person.hpp" />
     <ClInclude Include="..\..\include\utils\parsable_utils.hpp" />
+    <ClInclude Include="..\..\include\utils\random.hpp" />
     <ClInclude Include="..\..\include\utils\utils.hpp" />
     <ClInclude Include="..\..\include\utils\xmlparser.hpp" />
     <ClInclude Include="..\..\include\world.hpp" />

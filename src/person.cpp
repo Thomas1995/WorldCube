@@ -31,7 +31,7 @@ void Person::DoAction(Action* action) {
 	}
 
 	// register end of action
-	Time::RegisterCbk(crtTime + spentTime + 1, &Person::FinishAction, this, (void*)&action);
+	Time::RegisterCbk(crtTime + spentTime + 1, &Person::FinishAction, this, (void*)action);
 }
 
 void Person::FinishAction(unsigned long long t, void* context, void* additionalInfo) {

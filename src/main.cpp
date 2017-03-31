@@ -3,8 +3,12 @@
 #include "utils/parsable_utils.hpp"
 #include "worldtime.hpp"
 #include "person.hpp"
+#include "utils/random.hpp"
+
+int v[105];
 
 int main() {
+	Random::Init();
 	World::Init();
 
 	Person p("Steve");
