@@ -69,7 +69,7 @@ public:
 		if (attrs.find("delay") == attrs.end()) {
 			ret.delay = 0;
 		} else {
-			ret.delay = stof(attrs["delay"]);
+			ret.delay = stoi(attrs["delay"]);
 		}
 
 		return ret;
