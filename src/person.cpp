@@ -114,9 +114,10 @@ void Person::DoAction(Action* action) {
 
 void Person::FinishAction(unsigned long long t, void* context, void* additionalInfo) {
 	Person* pers = static_cast<Person*>(context);
-	const Action* action = (Action*)((AdditionalInfo*)additionalInfo)->ptr;
-	const double qty = ((AdditionalInfo*)additionalInfo)->val;
-	delete additionalInfo;
+	AdditionalInfo* info = (AdditionalInfo*)additionalInfo;
+	const Action* action = (Action*)info->ptr;
+	const double qty = info->val;
+	delete info;
 
 	TakeEffects(t, action->effects, pers, qty);
 
@@ -147,9 +148,10 @@ void Person::TakeEffects(unsigned long long t, const std::vector<Effect>& effect
 
 void Person::UpdateNeed(unsigned long long t, void* context, void* additionalInfo) {
 	Person* pers = static_cast<Person*>(context);
-	const Effect* eff = (Effect*)((AdditionalInfo*)additionalInfo)->ptr;
-	const double qty = ((AdditionalInfo*)additionalInfo)->val;
-	delete additionalInfo;
+	AdditionalInfo* info = (AdditionalInfo*)additionalInfo;
+	const Effect* eff = (Effect*)info->ptr;
+	const double qty = info->val;
+	delete info;
 
 	std::lock_guard<std::mutex> lk(pers->mut);
 	pers->needs[eff->name] += eff->delta * qty;
