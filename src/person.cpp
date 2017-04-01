@@ -14,6 +14,37 @@ std::string Person::GetEnvVar(const std::string var) {
 	return envVars[var.c_str()];
 }
 
+Action* Person::DecideNextAction() {
+	std::vector<double> weights;
+	std::vector<Action*> associatedAction;
+
+	auto actions = World::GetActions();
+
+	for (const auto& act : *actions)
+		for (const auto& eff : act.second.effects) {
+			const double needVal = needs[eff.name];
+
+			if (eff.delta < 0 && needVal != 0) {
+				weights.push_back(-eff.delta * needVal);
+				associatedAction.push_back(World::GetAction(act.second.name));
+			}
+		}
+
+	int index = Random::GetRandIndexProbField(weights);
+
+	if (index == -1) {
+		index = Random::GetRandUniformDistr(0, (int)actions->size() - 1);
+
+		for (const auto& act : *actions)
+			if (index-- == 0)
+				return World::GetAction(act.second.name);
+
+		return nullptr;
+	}
+
+	return associatedAction[index];
+}
+
 void Person::DoAction(Action* action) {
 	unsigned long long crtTime = Time::GetCurrentTime();
 	int spentTime = Random::GetRandBinomialDistr(action->timeSpent.first, action->timeSpent.second);

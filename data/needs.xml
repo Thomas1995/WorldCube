@@ -4,5 +4,5 @@
   <Need name="hunger" delta="0.1"/>
   <Need name="thirst" delta="0.1"/>
   <Need name="bladder" delta="0.1"/>
-  <Need name="gassiness" delta="0.1"/>
+  <Need name="gassiness" delta="0.0"/>
 </this.Needs>

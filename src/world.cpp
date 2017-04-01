@@ -118,6 +118,10 @@ std::vector<Need>* World::GetNeeds() {
 	return &singletonPtr->needs;
 }
 
+std::unordered_map<std::string, Action>* World::GetActions() {
+	return &singletonPtr->actions;
+}
+
 void World::ApplyOnPopulation(void(*fct)(Person *p)) {
 	for (auto p : singletonPtr->population)
 		fct(p);

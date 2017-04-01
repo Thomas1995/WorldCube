@@ -8,10 +8,13 @@ int main() {
 	Random::Init();
 	World::Init();
 
+	Person* p = World::GetPerson(0);
+
 	std::string cmd;
 	while (true) {
 		std::cin >> cmd;
-		World::GetPerson(0)->DoAction(World::GetAction("drink"));
+		Action* act = p->DecideNextAction();
+		p->DoAction(act);
 	}
 
 	return 0;

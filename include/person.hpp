@@ -15,6 +15,7 @@ public:
 	std::string GetName();
 	std::string GetEnvVar(const std::string var);
 	void DoAction(Action* action);
+	Action* DecideNextAction();
 
 private:
 	std::unordered_map<std::string, std::string> envVars;

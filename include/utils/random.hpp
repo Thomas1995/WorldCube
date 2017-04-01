@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include <vector>
 
 class Random {
 	static Random* singletonPtr;
@@ -21,4 +22,6 @@ public:
 	
 	static int GetRandBinomialDistr(const int inf, const int sup, const double p = 0.5);
 	static int GetRandUniformDistr(const int inf, const int sup);
+
+	static int GetRandIndexProbField(const std::vector<double>& weights);
 };
