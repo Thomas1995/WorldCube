@@ -5,8 +5,7 @@
   </Action>
   <Action name="drink" time="5-10" item="drink">
     <this.InfoMessages>
-      <InfoMessage time="0.0" message="%NAME% started drinking %QUANTITY% litre(s) of %ITEM%."/>
-      <InfoMessage time="1.0" message="%NAME% finished drinking."/>
+      <InfoMessage time="0.0" message="%NAME% drank %QUANTITY% litre(s) of %ITEM%."/>
     </this.InfoMessages>
     <this.Effects>
       <Effect name="thirst" delta="-5"/>
@@ -19,7 +18,31 @@
 			<InfoMessage time="1.0" message="%NAME% has awoken."/>
 		</this.InfoMessages>
 		<this.Effects>
-			<Effect name="fatigue" delta="-4.8"/>
+			<Effect name="fatigue" delta="-1.1"/>
 		</this.Effects>
 	</Action>
+  <Action name="pee" time="30-80">
+    <this.InfoMessages>
+      <InfoMessage time="0.0" message="%NAME% went to piss."/>
+    </this.InfoMessages>
+    <this.Effects>
+      <Effect name="bladder" delta="-2.2"/>
+    </this.Effects>
+  </Action>
+  <Action name="fart" time="1-2">
+    <this.InfoMessages>
+      <InfoMessage time="0.0" message="%NAME% farted."/>
+    </this.InfoMessages>
+    <this.Effects>
+      <Effect name="gassiness" delta="-3"/>
+    </this.Effects>
+  </Action>
+  <Action name="burp" time="1-2">
+    <this.InfoMessages>
+      <InfoMessage time="0.0" message="%NAME% burped."/>
+    </this.InfoMessages>
+    <this.Effects>
+      <Effect name="gassiness" delta="-1.5"/>
+    </this.Effects>
+  </Action>
 </this.Actions>

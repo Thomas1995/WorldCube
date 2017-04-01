@@ -30,6 +30,8 @@
 
 # Visual Studio files
 *.pdb
+*.iobj
+*.ipdb
 *.idb
 *.log
 *.tlog

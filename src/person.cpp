@@ -50,11 +50,13 @@ Action* Person::DecideNextAction() {
 				const double needVal = needs[eff.name];
 				weightSum += -eff.delta * needVal;
 			}
+			weightSum = std::max(weightSum, 1.0);
 			weights.push_back(weightSum);
 		}
 
 		int index2 = Random::GetRandIndexProbField(weights);
 		Subitem* subitem = &item->subitems[index2];
+		envVars["SUBITEMID"] = std::to_string(index2);
 
 		int subitemNameIndex = Random::GetRandUniformDistr(0, (int)subitem->shownNames.size() - 1);
 		envVars["ITEM"] = subitem->shownNames[subitemNameIndex];
@@ -116,19 +118,31 @@ void Person::FinishAction(unsigned long long t, void* context, void* additionalI
 	const double qty = ((AdditionalInfo*)additionalInfo)->val;
 	delete additionalInfo;
 
-	for (const auto& eff : action->effects) {
+	TakeEffects(t, action->effects, pers, qty);
+
+	if (action->item != nullptr) {
+		int subitemId = std::stoi(pers->envVars["SUBITEMID"]);
+		Subitem* item = &action->item->subitems[subitemId];
+
+		TakeEffects(t, item->effects, pers, qty);
+	}
+
+	World::AddActionToScheduler(pers, pers->DecideNextAction());
+}
+
+void Person::TakeEffects(unsigned long long t, const std::vector<Effect>& effects, Person* pers, const double qty) {
+	for (const auto& eff : effects) {
 		AdditionalInfo* addInfo = new AdditionalInfo;
 		addInfo->ptr = (void*)&eff;
 		addInfo->val = qty;
 
 		if (eff.delay == 0) {
 			UpdateNeed(t, pers, (void*)addInfo);
-		} else {
+		}
+		else {
 			Time::RegisterCbk(t + (unsigned long long)eff.delay, &Person::UpdateNeed, pers, (void*)addInfo);
 		}
 	}
-
-	World::AddActionToScheduler(pers, pers->DecideNextAction());
 }
 
 void Person::UpdateNeed(unsigned long long t, void* context, void* additionalInfo) {

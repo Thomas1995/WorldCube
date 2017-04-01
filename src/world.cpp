@@ -94,7 +94,7 @@ void World::Init() {
 
 		singletonPtr->population.push_back(new Person("Steve")); // temporary
 		
-		std::thread timeThread(&Time::Start, 1);
+		std::thread timeThread(&Time::Start, 0);
 		timeThread.detach();
 	}
 }
