@@ -43,3 +43,9 @@
 
 # Vim files
 *.swp
+
+# Ctags
+.tags
+
+# YCM config file
+.ycm_extra_conf.py
