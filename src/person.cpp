@@ -84,7 +84,7 @@ void Person::UpdateNeed(unsigned long long t, void* context, void* additionalInf
 	const Effect* eff = (Effect*)(additionalInfo);
 
 	std::lock_guard<std::mutex> lk(pers->mut);
-	pers->needs[eff->name] += eff->delta;
+	pers->needs[eff->name] += eff->delta * stof(pers->envVars["QUANTITY"]);
 	if (pers->needs[eff->name] < 0)
 		pers->needs[eff->name] = 0;
 
