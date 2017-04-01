@@ -3,6 +3,7 @@
   <Need name="fatigue" delta="0.04"/>
   <Need name="hunger" delta="0.1"/>
   <Need name="thirst" delta="0.1"/>
-  <Need name="bladder" delta="0.1"/>
+  <Need name="bladder" delta="0.01"/>
   <Need name="gassiness" delta="0.0"/>
+  <Need name="sweetness" delta="0.1"/>
 </this.Needs>

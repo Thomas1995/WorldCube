@@ -10,9 +10,10 @@ int main() {
 	World::Init();
 
 	Person* p = World::GetPerson(0);
-	p->DoAction(World::GetAction("drink"));
+	//p->DecideNextAction();
+	p->DoAction(World::GetAction("nothing"));
 
-	std::string cmd;
+	//std::string cmd;
 	while (true) {
 		//std::cin >> cmd;
 		World::PerformNextAction();

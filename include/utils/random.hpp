@@ -17,7 +17,8 @@ class Random {
 public:
 	static void Init();
 
-	static double GetRandNormalDistr(const double inf, const double sup, const double mean = 0, const double stddev = 1);
+	static double GetRandNormalDistr(const double mean = 0, const double stddev = 1);
+	static double GetRandNormalDistrBordered(const double inf, const double sup, const double mean = 0, const double stddev = 1);
 	static double GetRandUniformDistr(const double inf, const double sup);
 	
 	static int GetRandBinomialDistr(const int inf, const int sup, const double p = 0.5);

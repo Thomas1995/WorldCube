@@ -1,4 +1,8 @@
 <this.Actions>
+  <Action name="nothing" time="60-60">
+    <this.InfoMessages/>
+    <this.Effects/>
+  </Action>
   <Action name="drink" time="5-10" item="drink">
     <this.InfoMessages>
       <InfoMessage time="0.0" message="%NAME% started drinking %QUANTITY% litre(s) of %ITEM%."/>

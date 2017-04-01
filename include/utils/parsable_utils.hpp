@@ -135,6 +135,17 @@ public:
 		else {
 			ret.shownNames.push_back(ret.name);
 		}
+
+		ret.qtyDetails = std::make_pair(1.0, 0.0);
+		ret.qtyType = Subitem::int_qty;
+
+		if (attrs.find("qty_mean") != attrs.end()) {
+			ret.qtyDetails.first = stof(attrs["qty_mean"]);
+			ret.qtyDetails.second = stof(attrs["qty_sigma"]);
+
+			if(attrs["qty_type"] == "real")
+				ret.qtyType = Subitem::real_qty;
+		}
 		
 		if (vects.find("Effects") != vects.end())
 			ret.effects = ParsableFactory<std::vector<Effect>>::Build(vects["Effects"]);

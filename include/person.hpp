@@ -22,4 +22,9 @@ private:
 
 	static void FinishAction(unsigned long long t, void* context, void* additionalInfo);
 	static void UpdateNeed(unsigned long long t, void* context, void* additionalInfo);
+
+	struct AdditionalInfo {
+		void* ptr;
+		double val;
+	};
 };

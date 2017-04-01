@@ -16,7 +16,7 @@ void Random::Init() {
 	}
 }
 
-double Random::GetRandNormalDistr(const double inf, const double sup, const double mean, const double stddev) {
+double Random::GetRandNormalDistrBordered(const double inf, const double sup, const double mean, const double stddev) {
 	std::normal_distribution<double> d(mean, stddev);
 	double ret;
 	
@@ -25,6 +25,11 @@ double Random::GetRandNormalDistr(const double inf, const double sup, const doub
 	} while (ret < inf || ret > sup);
 
 	return ret;
+}
+
+double Random::GetRandNormalDistr(const double mean, const double stddev) {
+	std::normal_distribution<double> d(mean, stddev);
+	return d(singletonPtr->generator);
 }
 
 double Random::GetRandUniformDistr(const double inf, const double sup) {

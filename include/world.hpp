@@ -39,6 +39,11 @@ public:
 	std::string name;
 	std::vector<Effect> effects;
 	std::vector<std::string> shownNames;
+	std::pair<double, double> qtyDetails;
+	enum {
+		int_qty,
+		real_qty,
+	} qtyType;
 
 	// Dumpable implementation
 	virtual void Dump(std::ostream &out);
