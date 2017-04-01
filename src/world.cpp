@@ -108,7 +108,7 @@ Item* World::GetItem(const std::string name) {
 }
 
 Person* World::GetPerson(const int index) {
-	if (index < 0 || index >= singletonPtr->population.size())
+	if (index < 0 || index >= (int)singletonPtr->population.size())
 		return nullptr;
 	else
 		return singletonPtr->population[index];

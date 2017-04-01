@@ -4,7 +4,7 @@
 Random* Random::singletonPtr = nullptr;
 
 Random::Random() {
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	unsigned int seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
 	generator.seed(seed);
 }
 
@@ -51,7 +51,7 @@ int Random::GetRandIndexProbField(const std::vector<double>& weights) {
 		sum += w;
 
 	double r = GetRandUniformDistr(0.0, sum);
-	for (int i = 0; i < weights.size(); ++i) {
+	for (int i = 0; i < (int)weights.size(); ++i) {
 		r -= weights[i];
 		if (r < 0)
 			return i;
