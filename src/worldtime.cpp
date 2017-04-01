@@ -10,14 +10,16 @@ Time::Time() {
 
 Time::~Time() {}
 
-void Time::Init(int ms) {
+void Time::Init() {
 	if (singletonPtr == nullptr) {
 		singletonPtr = new Time();
+	}
+}
 
-		while (true) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(ms));
-			singletonPtr->Tick();
-		}
+void Time::Start(int ms) {
+	while (true) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+		singletonPtr->Tick();
 	}
 }
 

@@ -73,7 +73,7 @@ World::~World() {
 	for (auto it = population.begin(); it != population.end(); ++it) {
 		delete (*it);
 	}
-	
+
 	population.clear();
 	needs.clear();
 	items.clear();
@@ -93,8 +93,8 @@ void World::Init() {
 		singletonPtr->actions = ParsableFactory<std::unordered_map<std::string, Action>>::Build(XMLParser("actions.xml").GetRoot());
 
 		singletonPtr->population.push_back(new Person("Steve")); // temporary
-
-		std::thread timeThread(&Time::Init, 1);
+		
+		std::thread timeThread(&Time::Start, 1);
 		timeThread.detach();
 	}
 }

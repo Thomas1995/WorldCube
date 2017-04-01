@@ -6,6 +6,7 @@
 
 int main() {
 	Random::Init();
+	Time::Init();
 	World::Init();
 
 	Person* p = World::GetPerson(0);

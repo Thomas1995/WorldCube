@@ -55,7 +55,7 @@ void Person::DoAction(Action* action) {
 
 	// register InfoMessages
 	for (auto& im : action->infoMessages) {
-		im.time == 0 ? 
+		im.time == 0 ?
 			im.s_Print(crtTime, (void*)&im, this) :
 			Time::RegisterCbk(crtTime + (unsigned long long)(im.time * spentTime), &im.s_Print, (void*)&im, this);
 	}
