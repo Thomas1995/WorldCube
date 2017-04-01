@@ -126,3 +126,31 @@ void World::ApplyOnPopulation(void(*fct)(Person *p)) {
 	for (auto p : singletonPtr->population)
 		fct(p);
 }
+
+void World::AddActionToScheduler(Person* p, Action* action) {
+	{
+		std::lock_guard<std::mutex> lk(singletonPtr->mut);
+		singletonPtr->scheduler.push(std::make_pair(p, action));
+	}
+
+	singletonPtr->cond_var.notify_one();
+}
+
+void World::PerformNextAction() {
+	Person* p;
+	Action* action;
+
+	{
+		std::unique_lock<std::mutex> lk(singletonPtr->mut);
+
+		singletonPtr->cond_var.wait(lk, [&] {
+			return !singletonPtr->scheduler.empty();
+		});
+
+		p = singletonPtr->scheduler.front().first;
+		action = singletonPtr->scheduler.front().second;
+		singletonPtr->scheduler.pop();
+	}
+
+	p->DoAction(action);
+}

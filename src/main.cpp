@@ -9,12 +9,12 @@ int main() {
 	World::Init();
 
 	Person* p = World::GetPerson(0);
+	p->DoAction(World::GetAction("drink"));
 
 	std::string cmd;
 	while (true) {
-		std::cin >> cmd;
-		Action* act = p->DecideNextAction();
-		p->DoAction(act);
+		//std::cin >> cmd;
+		World::PerformNextAction();
 	}
 
 	return 0;

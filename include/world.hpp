@@ -4,6 +4,9 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include <queue>
+#include <mutex>
+#include <condition_variable>
 #include "abstractions/dumpable.hpp"
 
 class Person;
@@ -67,6 +70,9 @@ class World {
 	std::vector<Need> needs;
 	std::unordered_map<std::string, Item> items;
 	std::unordered_map<std::string, Action> actions;
+	std::queue< std::pair<Person*, Action*> > scheduler;
+	std::mutex mut;
+	std::condition_variable cond_var;
 
 	static World* singletonPtr;
 
@@ -84,5 +90,9 @@ public:
 	static Action* GetAction(const std::string name);
 	static Item* GetItem(const std::string name);
 	static Person* GetPerson(const int index);
+
 	static void ApplyOnPopulation(void (*fct)(Person* p));
+
+	static void AddActionToScheduler(Person* p, Action* action);
+	static void PerformNextAction();
 };

@@ -75,6 +75,8 @@ void Person::FinishAction(unsigned long long t, void* context, void* additionalI
 			Time::RegisterCbk(t + (unsigned long long)eff.delay, &Person::UpdateNeed, pers, (void*)&eff);
 		}
 	}
+
+	World::AddActionToScheduler(pers, pers->DecideNextAction());
 }
 
 void Person::UpdateNeed(unsigned long long t, void* context, void* additionalInfo) {

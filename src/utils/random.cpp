@@ -1,8 +1,13 @@
 #include "utils/random.hpp"
+#include <chrono>
 
 Random* Random::singletonPtr = nullptr;
 
-Random::Random() {}
+Random::Random() {
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	generator.seed(seed);
+}
+
 Random::~Random() {}
 
 void Random::Init() {
