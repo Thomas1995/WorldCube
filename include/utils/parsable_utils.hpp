@@ -86,7 +86,7 @@ public:
 		auto vects = node.GetVectors();
 
 		ret.name = attrs["name"];
-		
+
 		auto timeSpentVec = Split(attrs["time"], '-');
 		if (timeSpentVec.size() == 2) {
 			ret.timeSpent.first = atoi(timeSpentVec[0].c_str());
@@ -98,6 +98,9 @@ public:
 
 		if (attrs.find("item") != attrs.end()) {
 			ret.item = World::GetItem(attrs["item"]);
+		}
+		else {
+			ret.item = nullptr;
 		}
 
 		return ret;
@@ -146,7 +149,7 @@ public:
 			if(attrs["qty_type"] == "real")
 				ret.qtyType = Subitem::real_qty;
 		}
-		
+
 		if (vects.find("Effects") != vects.end())
 			ret.effects = ParsableFactory<std::vector<Effect>>::Build(vects["Effects"]);
 

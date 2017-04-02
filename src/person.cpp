@@ -62,7 +62,7 @@ Action* Person::DecideNextAction() {
 		envVars["ITEM"] = subitem->shownNames[subitemNameIndex];
 
 		double qty = std::max(
-			Random::GetRandNormalDistr(subitem->qtyDetails.first, subitem->qtyDetails.second), 
+			Random::GetRandNormalDistr(subitem->qtyDetails.first, subitem->qtyDetails.second),
 			0.01); // the quantity shouldn't go under an epsilon
 
 		if (subitem->qtyType == Subitem::int_qty) {
@@ -95,7 +95,7 @@ void Person::DoAction(Action* action) {
 
 	double qty = (double)spentTime; // if there is no item associated it means the quantity will be the time spent on action
 	if (action->item != nullptr)
-		qty = stof(envVars["QUANTITY"]);
+		qty = std::stof(envVars["QUANTITY"]);
 
 	// register InfoMessages
 	for (auto& im : action->infoMessages) {
