@@ -101,3 +101,13 @@ public:
 	static void AddActionToScheduler(Person* p, Action* action);
 	static void PerformNextAction();
 };
+
+class Date {
+private:
+	enum MONTHS {JANUARY = 1, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER};
+	static int second, minute, hour, day, month, year;
+	static long long lastT;
+	static void UpdateMonth(long long &t, int monthDays);
+public:
+	static std::string SecondsToDate(long long t);
+};
