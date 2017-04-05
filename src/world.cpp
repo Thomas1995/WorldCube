@@ -160,7 +160,7 @@ void World::PerformNextAction() {
 
 // Date
 
-long long Date::lastT = -1LL;
+unsigned long long Date::lastT = 0LL;
 int Date::second = 0;
 int Date::minute = 0;
 int Date::hour = 0;
@@ -168,8 +168,8 @@ int Date::day = 1;
 int Date::month = 1;
 int Date::year = 2015;
 
-void Date::UpdateMonth(long long &t, int monthDays) {
-	if (t - (monthDays - Date::day + 1) >= 0) {
+void Date::UpdateMonth(unsigned long long &t, int monthDays) {
+	if (t >= (unsigned long long)(monthDays - Date::day + 1)) {
 		t = t - (monthDays - Date::day + 1);
 		Date::day = 1;
 		++Date::month;
@@ -184,11 +184,11 @@ void Date::UpdateMonth(long long &t, int monthDays) {
 	}
 }
 
-std::string Date::SecondsToDate(long long t) {
+std::string Date::SecondsToDate(unsigned long long t) {
 	std::string date;
 
 	if (lastT != t) {
-		long long prevT = t;
+		unsigned long long prevT = t;
 		t = t - lastT;
 		lastT = prevT;
 
