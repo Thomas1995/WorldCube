@@ -7,6 +7,8 @@
 
 // InfoMessage
 
+std::mutex InfoMessage::mut;
+
 void InfoMessage::s_Print(unsigned long long t, void* context, void* additionalInfo) {
 	static_cast<InfoMessage*>(context)->Print(t, static_cast<Person*>(additionalInfo));
 }
@@ -33,6 +35,7 @@ void InfoMessage::Print(unsigned long long t, Person* owner) {
 		}
 	}
 
+	std::lock_guard<std::mutex> lk(InfoMessage::mut);
 	std::cout << t << ", " << Date::SecondsToDate(t) << ": " << printMsg << "\n";
 }
 
@@ -176,7 +179,7 @@ void Date::UpdateMonth(long long &t, int monthDays) {
 		}
 	}
 	else {
-		Date::day += t;
+		Date::day += (int)t;
 		t = 0;
 	}
 }

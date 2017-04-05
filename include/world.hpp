@@ -15,6 +15,7 @@ class InfoMessage {
 public:
 	double time;
 	std::string message;
+	static std::mutex mut;
 
 	static void s_Print(unsigned long long t, void* context, void* additionalInfo);
 	void Print(unsigned long long t, Person* owner);
