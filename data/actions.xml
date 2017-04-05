@@ -12,6 +12,12 @@
       <Effect name="bladder" delta="3" delay="3600"/>
     </this.Effects>
   </Action>
+  <Action name="eat" time="5-10" item="food">
+    <this.InfoMessages>
+      <InfoMessage time="0.0" message="%NAME% ate %QUANTITY% piece(s) of %ITEM%."/>
+    </this.InfoMessages>
+    <this.Effects />
+  </Action>
 	<Action name="sleep" time="14400-43200">
 		<this.InfoMessages>
 			<InfoMessage time="0.0" message="%NAME% went to sleep."/>
@@ -27,6 +33,15 @@
     </this.InfoMessages>
     <this.Effects>
       <Effect name="bladder" delta="-2.2"/>
+    </this.Effects>
+  </Action>
+  <Action name="poop" time="120-1080">
+    <this.InfoMessages>
+      <InfoMessage time="0.0" message="%NAME% started taking a poop."/>
+      <InfoMessage time="1.0" message="%NAME% finished pooping."/>
+    </this.InfoMessages>
+    <this.Effects>
+      <Effect name="defecation" delta="-2.2"/>
     </this.Effects>
   </Action>
   <Action name="fart" time="1-2">
