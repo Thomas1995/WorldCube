@@ -1,5 +1,5 @@
 CXX=g++
-CFLAGS=-std=c++11 -Wall -I ../../include/ -I ../../_extern/
+CFLAGS=-std=c++11 -Wall -Werror -I ../../include/ -I ../../_extern/
 
 SRCPATH=../../src/
 CPP_UTILS=$(SRCPATH)utils/utils.cpp $(SRCPATH)utils/xmlparser.cpp $(SRCPATH)utils/random.cpp

@@ -68,6 +68,12 @@ void Action::Dump(std::ostream &out) {
 
 // World
 
+FitParam::FitParam(Action* action, const int subitemNo, const double change) {
+	this->action = action;
+	this->subitemNo = subitemNo;
+	this->change = change;
+}
+
 World* World::singletonPtr = nullptr;
 
 World::World() {}
@@ -95,6 +101,34 @@ void World::Init() {
 		singletonPtr->items = ParsableFactory<std::unordered_map<std::string, Item>>::Build(XMLParser("items.xml").GetRoot());
 		singletonPtr->actions = ParsableFactory<std::unordered_map<std::string, Action>>::Build(XMLParser("actions.xml").GetRoot());
 
+		for (const auto& it : singletonPtr->actions) {
+			const Action* action = &it.second;
+			double factor = 1;
+
+			Item* item = action->item;
+			if (item != nullptr) {
+				unsigned int index = 0;
+				for (const auto& subitems : item->subitems) {
+					factor = subitems.qtyDetails.first;
+					for (const auto& eff : subitems.effects) {
+						if (eff.delta < 0)
+							singletonPtr->needsNegativeChanges[eff.name].push_back(
+								FitParam(GetAction(action->name), index, -eff.delta * factor)
+							);
+					}
+					++index;
+				}
+			}
+			else {
+				factor = (action->timeSpent.second - action->timeSpent.first) / 2.0;
+			}
+
+			for (const auto& eff : action->effects) {
+				if (eff.delta < 0)
+					singletonPtr->needsNegativeChanges[eff.name].push_back(FitParam(GetAction(action->name), -1, -eff.delta * factor));
+			}
+		}
+
 		singletonPtr->population.push_back(new Person("Steve")); // temporary
 
 		std::thread timeThread(&Time::Start, 1);
@@ -119,6 +153,10 @@ Person* World::GetPerson(const int index) {
 
 std::vector<Need>* World::GetNeeds() {
 	return &singletonPtr->needs;
+}
+
+std::vector<FitParam>* World::GetNeedsNegativeChanges(const std::string needName) {
+	return &singletonPtr->needsNegativeChanges[needName];
 }
 
 std::unordered_map<std::string, Action>* World::GetActions() {

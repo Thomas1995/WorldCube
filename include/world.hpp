@@ -71,6 +71,14 @@ public:
 	virtual void Dump(std::ostream &out);
 };
 
+struct FitParam {
+	Action* action;
+	int subitemNo;
+	double change;
+
+	FitParam(Action* action, const int subitemNo, const double change);
+};
+
 class World {
 	std::vector<Person*> population;
 	std::vector<Need> needs;
@@ -79,6 +87,8 @@ class World {
 	std::queue< std::pair<Person*, Action*> > scheduler;
 	std::mutex mut;
 	std::condition_variable cond_var;
+
+	std::unordered_map< std::string, std::vector<FitParam> > needsNegativeChanges;
 
 	static World* singletonPtr;
 
@@ -92,6 +102,7 @@ public:
 	static void Init();
 
 	static std::vector<Need>* GetNeeds();
+	static std::vector<FitParam>* GetNeedsNegativeChanges(const std::string needName);
 	static std::unordered_map<std::string, Action>* GetActions();
 	static Action* GetAction(const std::string name);
 	static Item* GetItem(const std::string name);
