@@ -8,11 +8,11 @@
       <InfoMessage time="0.0" message="%NAME% drank %QUANTITY% litre(s) of %ITEM%."/>
     </this.InfoMessages>
     <this.Effects>
-      <Effect name="thirst" delta="-5"/>
+      <Effect name="thirst" delta="-6"/>
       <Effect name="bladder" delta="3" delay="3600"/>
     </this.Effects>
   </Action>
-  <Action name="eat" time="5-10" item="food">
+  <Action name="eat" time="300-2100" item="food">
     <this.InfoMessages>
       <InfoMessage time="0.0" message="%NAME% ate %QUANTITY% piece(s) of %ITEM%."/>
     </this.InfoMessages>
@@ -24,7 +24,7 @@
 			<InfoMessage time="1.0" message="%NAME% has awoken."/>
 		</this.InfoMessages>
 		<this.Effects>
-			<Effect name="fatigue" delta="-1.1"/>
+			<Effect name="fatigue" delta="-0.00005"/>
 		</this.Effects>
 	</Action>
   <Action name="pee" time="30-80">
@@ -32,7 +32,7 @@
       <InfoMessage time="0.0" message="%NAME% went to piss."/>
     </this.InfoMessages>
     <this.Effects>
-      <Effect name="bladder" delta="-2.2"/>
+      <Effect name="bladder" delta="-0.05"/>
     </this.Effects>
   </Action>
   <Action name="poop" time="120-1080">
@@ -41,7 +41,7 @@
       <InfoMessage time="1.0" message="%NAME% finished pooping."/>
     </this.InfoMessages>
     <this.Effects>
-      <Effect name="defecation" delta="-2.2"/>
+      <Effect name="defecation" delta="-0.01"/>
     </this.Effects>
   </Action>
   <Action name="fart" time="1-2">
@@ -57,7 +57,7 @@
       <InfoMessage time="0.0" message="%NAME% burped."/>
     </this.InfoMessages>
     <this.Effects>
-      <Effect name="gassiness" delta="-1.5"/>
+      <Effect name="gassiness" delta="-0.6"/>
     </this.Effects>
   </Action>
 </this.Actions>

@@ -5,8 +5,8 @@
       <Subitem name="soda" shown="coca-cola;fanta;sprite" qty_mean="0.33" qty_sigma="0.05" qty_type="real">
         <this.Effects>
           <Effect name="gassiness" delta="0.8"/>
-          <Effect name="sweetness" delta="-8.2"/>
-          <Effect name="thirst" delta="1.5" delay="120"/>
+          <Effect name="sweetness" delta="-1.8"/>
+          <Effect name="thirst" delta="0.4" delay="120"/>
         </this.Effects>
       </Subitem>
     </this.Subitems>
@@ -15,16 +15,16 @@
     <this.Subitems>
       <Subitem name="meat" shown="pork;chicken;fish;beef" qty_mean="2" qty_sigma="1" qty_type="int">
         <this.Effects>
-          <Effect name="fatigue" delta="-0.8"/>
-          <Effect name="sweetness" delta="-5.0"/>
-          <Effect name="hunger" delta="-0.5"/>
+          <Effect name="hunger" delta="-0.4"/>
+          <Effect name="defecation" delta="0.2"/>
         </this.Effects>
       </Subitem>
       <Subitem name="chocolate" qty_mean="4" qty_sigma="2" qty_type="int">
         <this.Effects>
-          <Effect name="fatigue" delta="-0.8"/>
-          <Effect name="sweetness" delta="-5.0"/>
-          <Effect name="hunger" delta="-0.5"/>
+          <Effect name="fatigue" delta="-0.05"/>
+          <Effect name="sweetness" delta="-1.0"/>
+          <Effect name="hunger" delta="-0.1"/>
+          <Effect name="defecation" delta="0.02"/>
         </this.Effects>
       </Subitem>
     </this.Subitems>

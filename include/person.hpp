@@ -5,9 +5,15 @@
 #include <unordered_map>
 #include <mutex>
 
+struct PersonalStatistics {
+	std::unordered_map<std::string, unsigned int> actionsNo;
+	std::unordered_map<std::string, double> actionsQty;
+};
+
 class Person {
 public:
 	std::unordered_map<std::string, double> needs;
+	PersonalStatistics statistics;
 	std::mutex mut;
 
 	Person(const std::string name);

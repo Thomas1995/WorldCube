@@ -30,9 +30,13 @@ unsigned long long Time::GetCurrentTime() {
 void Time::Tick() {
 	++time;
 	CALLBACK top;
-	while (!singletonPtr->cbks.empty() && std::get<0>(singletonPtr->cbks.top()) <= time) {
+	while (true) {
 		{
 			std::lock_guard<std::mutex> lk(singletonPtr->mut);
+
+			if (singletonPtr->cbks.empty() || std::get<0>(singletonPtr->cbks.top()) > time)
+				break;
+
 			top = singletonPtr->cbks.top();
 			singletonPtr->cbks.pop();
 		}

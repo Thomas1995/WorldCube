@@ -21,7 +21,7 @@ Action* Person::DecideNextAction() {
 	std::vector<double> weights;
 
 	// the person may do nothing
-	weights.push_back(1);
+	weights.push_back(50);
 
 	auto pneeds = World::GetNeeds();
 	for (size_t i = 0; i < pneeds->size(); ++i) {
@@ -116,6 +116,10 @@ void Person::DoAction(Action* action) {
 
 	// register end of action
 	Time::RegisterCbk(crtTime + spentTime + 1, &Person::FinishAction, this, (void*)addInfo);
+
+	// action statistics
+	statistics.actionsNo[action->name] += 1;
+	statistics.actionsQty[action->name] += qty;
 }
 
 void Person::FinishAction(unsigned long long t, void* context, void* additionalInfo) {

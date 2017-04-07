@@ -1,10 +1,10 @@
 <this.Needs>
   <Need unit="60"/>
-  <Need name="fatigue" delta="0.008"/>
-  <Need name="hunger" delta="0.1"/>
-  <Need name="thirst" delta="0.1"/>
-  <Need name="bladder" delta="0.01"/>
-  <Need name="defecation" delta="0.01"/>
-  <Need name="gassiness" delta="0.0"/>
-  <Need name="sweetness" delta="0.1"/>
+  <Need name="fatigue" delta="0.0013"/>
+  <Need name="hunger" delta="0.0015"/>
+  <Need name="thirst" delta="0.006"/>
+  <Need name="bladder" delta="0.00001"/>
+  <Need name="defecation" delta="0.00001"/>
+  <Need name="gassiness" delta="-0.0001"/>
+  <Need name="sweetness" delta="0.0018"/>
 </this.Needs>
