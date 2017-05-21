@@ -17,6 +17,16 @@ void Time::Init() {
 }
 
 void Time::Start(int ms) {
+	// fast forward time to when the first callback needs to be called
+	while (true) {
+		{
+			std::lock_guard<std::mutex> lk(singletonPtr->mut);
+			if (!singletonPtr->CheckForActiveCallbacks())
+				break;
+		}
+		singletonPtr->Tick();
+	}
+
 	while (true) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 		singletonPtr->Tick();
@@ -32,13 +42,13 @@ void Time::Tick() {
 	CALLBACK top;
 	while (true) {
 		{
-			std::lock_guard<std::mutex> lk(singletonPtr->mut);
+			std::lock_guard<std::mutex> lk(mut);
 
-			if (singletonPtr->cbks.empty() || std::get<0>(singletonPtr->cbks.top()) > time)
+			if (CheckForActiveCallbacks())
 				break;
 
-			top = singletonPtr->cbks.top();
-			singletonPtr->cbks.pop();
+			top = cbks.top();
+			cbks.pop();
 		}
 		std::get<1>(top)(time, std::get<2>(top), std::get<3>(top));
 	}
@@ -59,4 +69,8 @@ void Time::Tick() {
 void Time::RegisterCbk(unsigned long long t, void(*fct)(unsigned long long, void*, void*), void* context, void* additionalInfo) {
 	std::lock_guard<std::mutex> lk(singletonPtr->mut);
 	singletonPtr->cbks.push(std::make_tuple(t, fct, context, additionalInfo));
+}
+
+bool Time::CheckForActiveCallbacks() {
+	return cbks.empty() || std::get<0>(cbks.top()) > time;
 }

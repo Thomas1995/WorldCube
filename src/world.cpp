@@ -36,7 +36,7 @@ void InfoMessage::Print(unsigned long long t, Person* owner) {
 	}
 
 	std::lock_guard<std::mutex> lk(InfoMessage::mut);
-	std::cout << t << ", " << Date::SecondsToDate(t) << ": " << printMsg << "\n";
+	std::cout << Date::SecondsToDate(t) << ": " << printMsg << "\n";
 }
 
 // Need
@@ -131,7 +131,7 @@ void World::Init() {
 
 		singletonPtr->population.push_back(new Person("Steve")); // temporary
 
-		std::thread timeThread(&Time::Start, 0);
+		std::thread timeThread(&Time::Start, 1);
 		timeThread.detach();
 	}
 }

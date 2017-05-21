@@ -30,4 +30,5 @@ public:
 
 private:
 	void Tick();
+	bool CheckForActiveCallbacks();
 };
