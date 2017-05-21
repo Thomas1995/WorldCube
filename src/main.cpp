@@ -6,7 +6,10 @@
 
 int main() {
 	Random::Init();
+
 	WorldHandler::Init();
+	WorldHandler::SetSettings();
+
 	Time::Init();
 	World::Init();
 

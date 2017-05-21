@@ -140,11 +140,11 @@ void World::Init() {
 			singletonPtr->population.push_back(new Person(settings->populationNames[i]));
 		
 		popCnt = settings->populationSize - popCnt;
-		for (int i = 0; i < popCnt; ++i)
+		for (int i = 1; i <= popCnt; ++i)
 			singletonPtr->population.push_back(new Person("Person" + std::to_string(i)));
 
 		// launch the time thread
-		std::thread timeThread(&Time::Start, 0);
+		std::thread timeThread(&Time::Start, settings->tickInterval);
 		timeThread.detach();
 
 		// every person starts his life by doing nothing

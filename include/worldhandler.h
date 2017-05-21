@@ -16,13 +16,18 @@ public:
 	struct Settings {
 		int populationSize;
 		std::vector<std::string> populationNames;
+
+		int tickInterval;
 	};
 
 	static void Init();
+	static void SetSettings();
 	static Settings* GetSettings();
 
 private:
 	Settings settings;
 
+	static void SetDefaultSettings();
 	static void SetPopulation();
+	static void SetTickInterval();
 };

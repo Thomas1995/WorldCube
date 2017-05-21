@@ -11,10 +11,25 @@ void WorldHandler::Init() {
 	if (singletonPtr == nullptr) {
 		singletonPtr = new WorldHandler();
 		
-		std::cout << "Welcome to Worldcube!" << std::endl;
-		
-		SetPopulation();
+		std::cout << "Welcome to WorldCube!" << std::endl;
 	}
+}
+
+void WorldHandler::SetSettings() {
+	char ans;
+	std::cout << "Would you like the default settings? (Y/n) ";
+	std::cin >> ans;
+	if (ans == 'Y')
+		SetDefaultSettings();
+	else {
+		SetPopulation();
+		SetTickInterval();
+	}
+}
+
+void WorldHandler::SetDefaultSettings() {
+	singletonPtr->settings.populationSize = 10;
+	singletonPtr->settings.tickInterval = 1;
 }
 
 void WorldHandler::SetPopulation() {
@@ -28,7 +43,7 @@ void WorldHandler::SetPopulation() {
 		std::cin >> populationSize;
 
 		if (populationSize <= 0)
-			std::cout << "The population should be at least 1! Let's try again:" << std::endl;
+			std::cout << "The population should be at least 1! Let's try again." << std::endl;
 		else
 			break;
 	}
@@ -53,6 +68,22 @@ void WorldHandler::SetPopulation() {
 	}
 
 	std::cout << "Population set!" << std::endl;
+}
+
+void WorldHandler::SetTickInterval() {
+	int tickInt;
+
+	while (true) {
+		std::cout << "Choose the tick interval. It represents the number of milliseconds in real life corresponding to the seconds in WorldCube. For bigger population, a higher value would be advisable. 0 is an option." << std::endl;
+		std::cin >> tickInt;
+
+		if (tickInt < 0)
+			std::cout << "The value should not be negative! Let's try again." << std::endl;
+		else
+			break;
+	}
+
+	singletonPtr->settings.tickInterval = tickInt;
 }
 
 WorldHandler::Settings* WorldHandler::GetSettings() {
