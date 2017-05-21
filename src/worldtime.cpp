@@ -60,7 +60,7 @@ void Time::Tick() {
 
 			std::lock_guard<std::mutex> lk(p->mut);
 			for (auto need : *needs) {
-				p->needs[need.name] += need.delta;
+				p->needs[need.name] += need.delta * p->needsSeeds[need.name];
 			}
 		});
 	}

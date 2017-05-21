@@ -167,6 +167,9 @@
     <Xml Include="..\..\data\items.xml" />
     <Xml Include="..\..\data\needs.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Linux\Makefile" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

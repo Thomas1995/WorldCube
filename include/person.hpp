@@ -13,6 +13,7 @@ struct PersonalStatistics {
 class Person {
 public:
 	std::unordered_map<std::string, double> needs;
+	std::unordered_map<std::string, double> needsSeeds;
 	PersonalStatistics statistics;
 	std::mutex mut;
 

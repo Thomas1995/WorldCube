@@ -7,6 +7,11 @@
 
 Person::Person(const std::string name) {
 	envVars["NAME"] = name;
+
+	auto needs = World::GetNeeds();
+	for (auto need : *needs) {
+		needsSeeds[need.name] = Random::GetRandNormalDistr(1.0, 0.25);
+	}
 }
 
 std::string Person::GetName() {
