@@ -5,7 +5,8 @@
 Time* Time::singletonPtr = nullptr;
 
 Time::Time() {
-	time = 0;
+	// time begins at 7 AM
+	time = 25200;
 }
 
 Time::~Time() {}
