@@ -60,6 +60,10 @@ void WorldHandler::SetPopulation() {
 		else {
 			std::cout << "Write one name on each line." << std::endl;
 			namedSubjects = std::min(namedSubjects, populationSize);
+
+			// get the invalid line
+			std::getline(std::cin, name);
+
 			for (int i = 0; i < namedSubjects; ++i) {
 				std::getline(std::cin, name);
 				singletonPtr->settings.populationNames.push_back(name);
