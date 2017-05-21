@@ -54,6 +54,9 @@
     <ClCompile Include="..\..\src\utils\date.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\worldhandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\abstractions\dumpable.hpp">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\utils\date.h">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\worldhandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

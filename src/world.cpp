@@ -1,4 +1,5 @@
 #include "world.hpp"
+#include "worldhandler.h"
 #include "person.hpp"
 #include "worldtime.hpp"
 #include "utils/parsable_utils.hpp"
@@ -130,10 +131,26 @@ void World::Init() {
 			}
 		}
 
-		singletonPtr->population.push_back(new Person("Steve")); // temporary
+		WorldHandler::Settings* settings = WorldHandler::GetSettings();
 
-		std::thread timeThread(&Time::Start, 1);
+		// build population
+		int popCnt = settings->populationNames.size();
+
+		for (int i = 0; i < popCnt; ++i)
+			singletonPtr->population.push_back(new Person(settings->populationNames[i]));
+		
+		popCnt = settings->populationSize - popCnt;
+		for (int i = 0; i < popCnt; ++i)
+			singletonPtr->population.push_back(new Person("Person" + std::to_string(i)));
+
+		// launch the time thread
+		std::thread timeThread(&Time::Start, 0);
 		timeThread.detach();
+
+		// every person starts his life by doing nothing
+		for (const auto& person : singletonPtr->population) {
+			person->DoAction(World::GetAction("nothing"));
+		}
 	}
 }
 

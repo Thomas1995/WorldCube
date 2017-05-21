@@ -142,6 +142,7 @@
     <ClCompile Include="..\..\src\utils\date.cpp" />
     <ClCompile Include="..\..\src\utils\random.cpp" />
     <ClCompile Include="..\..\src\world.cpp" />
+    <ClCompile Include="..\..\src\worldhandler.cpp" />
     <ClCompile Include="..\..\src\worldtime.cpp" />
     <ClCompile Include="..\..\src\utils\utils.cpp" />
     <ClCompile Include="..\..\src\utils\xmlparser.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="..\..\include\utils\utils.hpp" />
     <ClInclude Include="..\..\include\utils\xmlparser.hpp" />
     <ClInclude Include="..\..\include\world.hpp" />
+    <ClInclude Include="..\..\include\worldhandler.h" />
     <ClInclude Include="..\..\include\worldtime.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml.hpp" />
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_iterators.hpp" />
@@ -163,7 +165,9 @@
     <ClInclude Include="..\..\_extern\rapidxml\rapidxml_utils.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\..\data\actions.xml" />
+    <Xml Include="..\..\data\actions.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="..\..\data\items.xml" />
     <Xml Include="..\..\data\needs.xml" />
   </ItemGroup>
